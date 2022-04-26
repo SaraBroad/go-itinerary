@@ -12,8 +12,9 @@ import (
 // routes - mux
 
 func main() {
-	log.Printf("Server started at port 8080")
-	http.ListenAndServe(":8080", nil)
+	port := "8080"
+	log.Printf("Server started at port %v", port)
+	http.ListenAndServe(":"+port, nil)
 	router := mux.NewRouter()
 	fmt.Println(router)
 }
