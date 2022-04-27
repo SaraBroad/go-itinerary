@@ -1,13 +1,24 @@
 package repository
 
-import "github.com/SaraBroad/go-itinerary/models"
+import (
+	"github.com/SaraBroad/go-itinerary/models"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
 
 // use gorm
 // has one day
 // has one city
 // has one category
 
-type Config struct{}
+type Config struct {
+}
+
+func Init() *gorm.DB {
+	dbURL := ""
+	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
+	return db
+}
 
 func NewItinerary() {}
 
