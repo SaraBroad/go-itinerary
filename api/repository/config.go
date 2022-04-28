@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"log"
 
 	"gorm.io/driver/postgres"
@@ -14,10 +15,12 @@ type Auth struct {
 	Port     string
 	Host     string
 	URI      string
+	SSL      string
+	Timezone string
 }
 
-func InitDatabase(auth Auth) *gorm.DB {
-	dbUrl := ""
+func InitDatabase(auth *Auth) *gorm.DB {
+	dbUrl := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s", auth.Host, auth.Username, auth.Password, auth.DBName, auth.Port, auth.SSL, auth.Timezone)
 	db, err := gorm.Open(postgres.Open(dbUrl), &gorm.Config{})
 	if err != nil {
 		log.Fatalln(err)
