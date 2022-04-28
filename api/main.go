@@ -1,25 +1,33 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/SaraBroad/go-itinerary/api/repository"
-	"github.com/gorilla/mux"
 )
 
 // instatiate http server
 // routes - mux
 
+var port = "8080"
+
 func main() {
-	port := "8080"
+
+	_ = repository.InitDatabase(&repository.Auth{
+		Username: os.Getenv("USERNAME"),
+		Host:     os.Getenv("HOST"),
+		Password: os.Getenv("PASSWORD"),
+		Port:     os.Getenv("PORT"),
+		URI:      os.Getenv("URL"),
+		SSL:      os.Getenv("SSL"),
+		Timezone: os.Getenv("TIMEZONE"),
+	})
+	_ = repository.NewItinerary()
+	// router := mux.NewRouter()
 	log.Printf("Server started at port %v", port)
 	http.ListenAndServe(":"+port, nil)
-	_ = repository.InitDatabase(&repository.Auth{})
-	_ = repository.NewItinerary()
-	router := mux.NewRouter()
-	fmt.Println(router)
 	// router.HandleFunc("/", i.CreateNewItem(&models.Item{})).Methods(http.MethodGet)
 }
 
