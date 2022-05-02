@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/SaraBroad/go-itinerary/api/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -25,5 +26,6 @@ func InitDatabase(auth *Auth) *gorm.DB {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	db.AutoMigrate(&models.DayNumber{}, &models.Category{}, &models.Item{})
 	return db
 }
