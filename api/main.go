@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/SaraBroad/go-itinerary/api/repository"
+	"github.com/joho/godotenv"
 )
 
 // instatiate http server
@@ -15,12 +16,18 @@ var port = "8080"
 
 func main() {
 
+	err := godotenv.Load("../.env")
+
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
 	_ = repository.InitDatabase(&repository.Auth{
 		Username: os.Getenv("USERNAME"),
 		Host:     os.Getenv("HOST"),
 		Password: os.Getenv("PASSWORD"),
+		DBName:   os.Getenv("DBNAME"),
 		Port:     os.Getenv("PORT"),
-		URI:      os.Getenv("URL"),
 		SSL:      os.Getenv("SSL"),
 		Timezone: os.Getenv("TIMEZONE"),
 	})
