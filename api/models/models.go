@@ -7,23 +7,25 @@ import (
 type Item struct {
 	gorm.Model
 
-	ItemID string  `gorm:"primaryKey"`
-	Name   string  `json:"name"`
-	Price  float64 `json:"price"`
-	Category
-	DayNumber
+	// ItemID    string
+	Name      string
+	Price     float64
+	Category  Category
+	DayNumber DayNumber
 }
 
 type Category struct {
 	gorm.Model
 
-	CategoryID string `gorm:"primaryKey"`
-	Name       string `json:"name"`
+	CategoryID string
+	Name       string
+	ItemID     string
 }
 
 type DayNumber struct {
 	gorm.Model
 
-	ID     string `gorm:"primaryKey"`
-	DayNum int64  `json:"day_num"`
+	DayID  string
+	DayNum int64
+	ItemID string
 }

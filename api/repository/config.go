@@ -26,6 +26,6 @@ func InitDatabase(auth *Auth) *gorm.DB {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	db.AutoMigrate(&models.DayNumber{}, &models.Category{}, &models.Item{})
+	db.AutoMigrate(&models.Item{}, &models.DayNumber{}, &models.Category{})
 	return db
 }
