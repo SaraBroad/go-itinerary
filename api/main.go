@@ -31,7 +31,21 @@ func main() {
 		SSL:      os.Getenv("SSL"),
 		Timezone: os.Getenv("TIMEZONE"),
 	})
-	_ = repository.NewItinerary()
+	// r := repository.NewItinerary()
+
+	// i := &models.Item{
+	// 	Name:  "Hyatt",
+	// 	Price: 199.99,
+	// 	Category: models.Category{
+	// 		Name: "Accomodations",
+	// 	},
+	// 	DayNumber: models.DayNumber{
+	// 		DayNum: 1,
+	// 	},
+	// }
+
+	// db := repository.Database{}
+	// _, _ = db.CreateNewItem(i)
 	// router := mux.NewRouter()
 	log.Printf("Server started at port %v", port)
 	http.ListenAndServe(":"+port, nil)
