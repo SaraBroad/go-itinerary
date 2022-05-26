@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/SaraBroad/go-itinerary/api/models"
 	"github.com/SaraBroad/go-itinerary/api/repository"
 	"github.com/joho/godotenv"
 )
@@ -22,7 +23,7 @@ func main() {
 		log.Fatalf("Error loading .env file")
 	}
 
-	_ = repository.InitDatabase(&repository.Auth{
+	db := repository.InitDatabase(&repository.Auth{
 		Username: os.Getenv("USERNAME"),
 		Host:     os.Getenv("HOST"),
 		Password: os.Getenv("PASSWORD"),
@@ -31,21 +32,21 @@ func main() {
 		SSL:      os.Getenv("SSL"),
 		Timezone: os.Getenv("TIMEZONE"),
 	})
-	// r := repository.NewItinerary()
+	n := repository.NewItinerary(db)
 
-	// i := &models.Item{
-	// 	Name:  "Hyatt",
-	// 	Price: 199.99,
-	// 	Category: models.Category{
-	// 		Name: "Accomodations",
-	// 	},
-	// 	DayNumber: models.DayNumber{
-	// 		DayNum: 1,
-	// 	},
-	// }
+	i := &models.Item{
+		Name:  "Hyatt",
+		Price: 199.99,
+		Category: models.Category{
+			Name: "Accomodations",
+		},
+		DayNumber: models.DayNumber{
+			DayNum: 1,
+		},
+	}
 
 	// db := repository.Database{}
-	// _, _ = db.CreateNewItem(i)
+	_, _ = n.CreateNewItem(i)
 	// router := mux.NewRouter()
 	log.Printf("Server started at port %v", port)
 	http.ListenAndServe(":"+port, nil)
