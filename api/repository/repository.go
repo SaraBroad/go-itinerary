@@ -38,6 +38,9 @@ func (db *Database) CreateNewItem(item *models.Item) (*models.Item, error) {
 		},
 	}
 
-	_ = db.DB.Create(&item)
+	err := db.DB.Create(&item)
+	if err != nil {
+		fmt.Println("Create New Item Error")
+	}
 	return item, nil
 }

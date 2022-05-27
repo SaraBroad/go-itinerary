@@ -7,6 +7,16 @@ import (
 
 // service layer - business logic
 
+type ItemService struct {
+	itemRepo repository.Database
+}
+
+func NewItemService(iRepo repository.Database) *ItemService {
+	return &ItemService{
+		itemRepo: iRepo,
+	}
+}
+
 type database interface {
 	CreateNewItem(item *models.Item) (*models.Item, error)
 }
@@ -15,7 +25,7 @@ func calculateCategoryCost() (float64, error) {
 	return 0, nil
 }
 
-func AddItem() {
-	var db *repository.Database
-	_, _ = db.CreateNewItem(&models.Item{})
+func (i *ItemService) AddItem(item *models.Item) error {
+	_, _ = i.itemRepo.CreateNewItem(item)
+	return nil
 }
