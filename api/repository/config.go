@@ -27,17 +27,5 @@ func InitDatabase(auth *Auth) *gorm.DB {
 		log.Fatalln(err)
 	}
 	db.AutoMigrate(&models.Item{}, &models.DayNumber{}, &models.Category{})
-
-	// i := &models.Item{
-	// 	Name:  "Hyatt",
-	// 	Price: 199.99,
-	// 	Category: models.Category{
-	// 		Name: "Accomodations",
-	// 	},
-	// 	DayNumber: models.DayNumber{
-	// 		DayNum: 1,
-	// 	},
-	// }
-	// db.Create(i)
 	return db
 }

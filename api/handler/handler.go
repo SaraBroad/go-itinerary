@@ -24,10 +24,6 @@ func NewItemHandler(is service.ItemService) *ItemHandler {
 }
 
 func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
-	fmt.Print("HELLO")
-	fmt.Println("w", w)
-	fmt.Println("h", h.service)
-	// vars := mux.Vars(r)
 	fmt.Println("r", r)
 
 	defer r.Body.Close()
@@ -35,8 +31,7 @@ func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("body", body)
 	var item models.Item
 	json.Unmarshal(body, &item)
-	// z, _ := h.DB.CreateNewItem(&item)
-	// i, err := repo.CreateNewItem(&models.Item{})
+
 	err = h.service.AddItem(&item)
 	fmt.Println(item)
 	if err != nil {
