@@ -1,6 +1,8 @@
 package service
 
 import (
+	"fmt"
+
 	"github.com/SaraBroad/go-itinerary/api/models"
 	"github.com/SaraBroad/go-itinerary/api/repository"
 )
@@ -8,12 +10,12 @@ import (
 // service layer - business logic
 
 type ItemService struct {
-	itemRepo repository.Database
+	itemRepo *repository.Database
 }
 
 func NewItemService(iRepo repository.Database) *ItemService {
 	return &ItemService{
-		itemRepo: iRepo,
+		itemRepo: &iRepo,
 	}
 }
 
@@ -26,6 +28,9 @@ func calculateCategoryCost() (float64, error) {
 }
 
 func (i *ItemService) AddItem(item *models.Item) error {
-	_, _ = i.itemRepo.CreateNewItem(item)
+	_, err := i.itemRepo.CreateNewItem(item)
+	if err != nil {
+		fmt.Println("service error")
+	}
 	return nil
 }

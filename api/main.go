@@ -34,29 +34,19 @@ func main() {
 		SSL:      os.Getenv("SSL"),
 		Timezone: os.Getenv("TIMEZONE"),
 	})
+
 	ir := repository.NewItinerary(db)
 	is := service.NewItemService(ir)
 	ih := handler.NewItemHandler(*is)
 
-	// i := &models.Item{
-	// 	Name:  "Hyatt",
-	// 	Price: 199.99,
-	// 	Category: models.Category{
-	// 		Name: "Accomodations",
-	// 	},
-	// 	DayNumber: models.DayNumber{
-	// 		DayNum: 1,
-	// 	},
-	// }
-
-	// db := repository.Database{}
-	// _, _ = ir.CreateNewItem(i)
 	router := mux.NewRouter()
-	router.HandleFunc("/items", ih.AddItem)
+	router.HandleFunc("/items", ih.AddItem).Methods("POST")
+	http.Handle("/", router)
+
+	log.Println("http server runs on :8080")
+	http.ListenAndServe(":8080", router)
 
 	log.Printf("Server started at port %v", port)
-	http.ListenAndServe(":"+port, nil)
-	// router.HandleFunc("/", i.CreateNewItem(&models.Item{})).Methods(http.MethodGet)
 }
 
 // reader := bufio.NewReader(os.Stdin)

@@ -27,16 +27,16 @@ func NewItinerary(db *gorm.DB) Database {
 func (db *Database) CreateNewItem(item *models.Item) (*models.Item, error) {
 	fmt.Println("item", item)
 
-	item = &models.Item{
-		Name:  item.Name,
-		Price: item.Price,
-		Category: models.Category{
-			Name: item.Category.Name,
-		},
-		DayNumber: models.DayNumber{
-			DayNum: item.DayNumber.DayNum,
-		},
-	}
+	// item = &models.Item{
+	// 	Name:  item.Name,
+	// 	Price: item.Price,
+	// 	Category: models.Category{
+	// 		Name: item.Category.Name,
+	// 	},
+	// 	DayNumber: models.DayNumber{
+	// 		DayNum: item.DayNumber.DayNum,
+	// 	},
+	// }
 
 	err := db.DB.Create(&item)
 	if err != nil {
