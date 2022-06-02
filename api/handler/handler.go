@@ -24,7 +24,6 @@ func NewItemHandler(is service.ItemService) *ItemHandler {
 }
 
 func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("r", r)
 
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
@@ -32,11 +31,11 @@ func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 	var item models.Item
 	json.Unmarshal(body, &item)
 
-	err = h.service.AddItem(&item)
+	_, err = h.service.AddItem(&item)
 	fmt.Println(item)
 	if err != nil {
 		fmt.Println(errors.New("item not added"))
 	}
 	w.WriteHeader(http.StatusNoContent)
-	w.Write([]byte("Successfully Updated"))
+	w.Write([]byte("Successfully Added"))
 }

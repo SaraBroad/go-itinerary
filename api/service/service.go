@@ -27,10 +27,10 @@ func calculateCategoryCost() (float64, error) {
 	return 0, nil
 }
 
-func (i *ItemService) AddItem(item *models.Item) error {
-	_, err := i.itemRepo.CreateNewItem(item)
+func (i *ItemService) AddItem(item *models.Item) (*models.Item, error) {
+	newItem, err := i.itemRepo.CreateNewItem(item)
 	if err != nil {
 		fmt.Println("service error")
 	}
-	return nil
+	return newItem, nil
 }
