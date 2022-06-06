@@ -17,10 +17,6 @@ type Database struct {
 	DB *gorm.DB
 }
 
-// func NewItinerary() Database {
-// 	return Database{}
-// }
-
 func NewItinerary(db *gorm.DB) Database {
 	return Database{db}
 }
@@ -30,7 +26,13 @@ func (db *Database) GetItem(id string) (*models.Item, error) {
 }
 
 func (db *Database) GetAllItems() ([]*models.Item, error) {
-	return nil, nil
+	var items []*models.Item
+	if err := db.DB.Find(&items); err != nil {
+		fmt.Println("GetAllItems err", err)
+		return nil, errors.New("get all items error")
+	}
+
+	return items, nil
 }
 
 func (db *Database) CreateNewItem(item *models.Item) (*models.Item, error) {
@@ -38,8 +40,8 @@ func (db *Database) CreateNewItem(item *models.Item) (*models.Item, error) {
 
 	err := db.DB.Create(&item)
 	if err != nil {
-		fmt.Println("err", err)
-		fmt.Println("Create New Item Error")
+		fmt.Println("CreateNewItem", err)
+		return &models.Item{}, errors.New("create new items error")
 	}
 	return item, nil
 }
