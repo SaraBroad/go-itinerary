@@ -21,12 +21,16 @@ func NewItinerary(db *gorm.DB) Database {
 	return Database{db}
 }
 
-func (db *Database) GetItem(id string) (*models.Item, error) {
+func (db *Database) GetItemById(id string) (*models.Item, error) {
 	if id == "" {
 		return nil, errors.New("ID can't be nil")
 	}
+	var item *models.Item
+	if err := db.DB.Where("id = ?", id).First(&item); err != nil {
+		return nil, errors.New("Can't find this item")
+	}
 
-	return nil, nil
+	return item, nil
 }
 
 func (db *Database) GetAllItems() ([]*models.Item, error) {

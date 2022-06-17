@@ -21,6 +21,7 @@ func NewItemService(iRepo repository.Database) *ItemService {
 
 type database interface {
 	CreateNewItem(item *models.Item) (*models.Item, error)
+	GetItemById(id string) (*models.Item, error)
 }
 
 func calculateCategoryCost() (float64, error) {
@@ -30,7 +31,15 @@ func calculateCategoryCost() (float64, error) {
 func (i *ItemService) AddItem(item *models.Item) (*models.Item, error) {
 	newItem, err := i.itemRepo.CreateNewItem(item)
 	if err != nil {
-		fmt.Println("service error")
+		fmt.Println("add item service error")
 	}
 	return newItem, nil
+}
+
+func (i *ItemService) FindItemById(id string) (*models.Item, error) {
+	item, err := i.itemRepo.GetItemById(id)
+	if err != nil {
+		fmt.Println("find item by id service error")
+	}
+	return item, nil
 }
