@@ -22,6 +22,10 @@ func NewItinerary(db *gorm.DB) Database {
 }
 
 func (db *Database) GetItem(id string) (*models.Item, error) {
+	if id == "" {
+		return nil, errors.New("ID can't be nil")
+	}
+
 	return nil, nil
 }
 
@@ -47,6 +51,9 @@ func (db *Database) CreateNewItem(item *models.Item) (*models.Item, error) {
 }
 
 func (db *Database) UpdateItem(id string, item models.Item) (*models.Item, error) {
+	if id == "" {
+		return nil, errors.New("ID can't be nil")
+	}
 	db.DB.Model(&item).Where("id = ?", id).Update("name", item.Name)
 
 	return nil, nil
@@ -55,6 +62,9 @@ func (db *Database) UpdateItem(id string, item models.Item) (*models.Item, error
 func (db *Database) DeleteItem(id string) error {
 	if id == "" {
 		return errors.New("ID can't be nil")
+	}
+	if err := db.DB.Where("id = ?", id).Delete(id); err != nil {
+		return errors.New("Cannot delete")
 	}
 	return nil
 }
