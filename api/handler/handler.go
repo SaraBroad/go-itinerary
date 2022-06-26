@@ -39,3 +39,5 @@ func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 	w.Write([]byte("Successfully Added"))
 }
+
+func (h *ItemHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {}
