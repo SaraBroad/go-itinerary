@@ -41,7 +41,7 @@ func main() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/items", ih.AddItem).Methods("POST")
-	router.HandleFunc("/items{id}", ih.RemoveItem).Methods("DELETE")
+	router.HandleFunc("/items/{id}", ih.RemoveItem).Methods("DELETE")
 	http.Handle("/", router)
 
 	log.Println("http server runs on :8080")

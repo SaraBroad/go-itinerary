@@ -40,4 +40,16 @@ func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Successfully Added"))
 }
 
-func (h *ItemHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {}
+func (h *ItemHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {
+	var item models.Item
+	err := json.NewDecoder(r.Body).Decode(&item)
+	if err != nil {
+		fmt.Println("delete item handler error")
+	}
+
+	err = h.service.RemoveItem(item.ID)
+}
+
+func (h *ItemHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {}
+
+func (h *ItemHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}

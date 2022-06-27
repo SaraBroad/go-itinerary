@@ -7,6 +7,7 @@ import (
 type Item struct {
 	gorm.Model
 
+	ID        string
 	Name      string
 	Price     float64
 	Category  Category
