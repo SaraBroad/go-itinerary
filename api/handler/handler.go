@@ -9,6 +9,7 @@ import (
 
 	"github.com/SaraBroad/go-itinerary/api/models"
 	"github.com/SaraBroad/go-itinerary/api/service"
+	"github.com/gorilla/mux"
 )
 
 // http layer
@@ -41,13 +42,11 @@ func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *ItemHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {
-	var item models.Item
-	err := json.NewDecoder(r.Body).Decode(&item)
-	if err != nil {
-		fmt.Println("delete item handler error")
+	id := mux.Vars(r)["id"]
+	fmt.Println("id", id)
+	if err := h.service.RemoveItem(id); err != nil {
+		fmt.Println("err", err)
 	}
-
-	err = h.service.RemoveItem(item.ID)
 }
 
 func (h *ItemHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {}
