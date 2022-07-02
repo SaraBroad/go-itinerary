@@ -31,6 +31,7 @@ func calculateCategoryCost() (float64, error) {
 }
 
 func (i *ItemService) AddItem(item *models.Item) (*models.Item, error) {
+
 	newItem, err := i.itemRepo.CreateNewItem(item)
 	if err != nil {
 		fmt.Println("add item service error")
@@ -55,5 +56,9 @@ func (i *ItemService) Update(id string, item *models.Item) (*models.Item, error)
 }
 
 func (i *ItemService) RemoveItem(id string) error {
+	fmt.Println("id service", id)
+	if err := i.itemRepo.DeleteItem(id); err != nil {
+		fmt.Println("error deleting item in service", err)
+	}
 	return nil
 }

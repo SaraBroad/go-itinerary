@@ -64,10 +64,12 @@ func (db *Database) UpdateItem(id string, item models.Item) (*models.Item, error
 }
 
 func (db *Database) DeleteItem(id string) error {
+	fmt.Println("id repo", id)
 	if id == "" {
 		return errors.New("ID can't be nil")
 	}
-	if err := db.DB.Where("id = ?", id).Delete(id); err != nil {
+	var items *models.Item
+	if err := db.DB.Where("id = ?", id).Delete(&items); err != nil {
 		return errors.New("Cannot delete")
 	}
 	return nil
