@@ -20,7 +20,6 @@ type ItemHandler struct {
 }
 
 func NewItemHandler(is service.ItemService) *ItemHandler {
-	fmt.Println("is", is)
 	return &ItemHandler{service: is}
 }
 
@@ -49,6 +48,23 @@ func (h *ItemHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *ItemHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {}
+func (h *ItemHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+	fmt.Println("id", id)
+	var item *models.Item
+	if id == "" {
+		http.Error(w, "Item not found", http.StatusNotFound)
+	}
+	fmt.Println("item", item)
+}
 
 func (h *ItemHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}
+
+func indexByID(items []models.Item, id string) int {
+	for i := 0; i < len(items); i++ {
+		if items[i].ID == id {
+			return i
+		}
+	}
+	return -1
+}
