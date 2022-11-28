@@ -26,7 +26,27 @@ type database interface {
 	DeleteItem(id string) error
 }
 
-func calculateCategoryCost() (float64, error) {
+func calculateCategoryCost(category *models.Item) (float64, error) {
+	price := category.Price
+	var cost float64
+	switch category.Category.Name {
+	case "accomodations":
+		cost += price
+	case "activity":
+		cost += price
+	case "transportation":
+		cost += price
+	case "shopping":
+		cost += price
+	case "food":
+		cost += price
+	default:
+		fmt.Println("unknown category")
+	}
+	return cost, nil
+}
+
+func calculateTotalCost() (float64, error) {
 	return 0, nil
 }
 
