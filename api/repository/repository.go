@@ -21,11 +21,11 @@ func NewItinerary(db *gorm.DB) Database {
 	return Database{db}
 }
 
-func (db *Database) GetItemById(id string) (*models.Item, error) {
+func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, error) {
 	if id == "" {
 		return nil, errors.New("ID can't be nil")
 	}
-	var item *models.Item
+	var item *models.ItineraryItem
 	if err := db.DB.Where("id = ?", id).First(&item); err != nil {
 		return nil, errors.New("Can't find this item")
 	}
@@ -33,8 +33,9 @@ func (db *Database) GetItemById(id string) (*models.Item, error) {
 	return item, nil
 }
 
-func (db *Database) GetAllItems() ([]*models.Item, error) {
-	var items []*models.Item
+// List itinerary
+func (db *Database) GetAllItinraryItems() ([]*models.ItineraryItem, error) {
+	var items []*models.ItineraryItem
 	if err := db.DB.Find(&items); err != nil {
 		fmt.Println("GetAllItems err", err)
 		return nil, errors.New("get all items error")
@@ -43,18 +44,18 @@ func (db *Database) GetAllItems() ([]*models.Item, error) {
 	return items, nil
 }
 
-func (db *Database) CreateNewItem(item *models.Item) (*models.Item, error) {
+func (db *Database) CreateNewItineraryItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {
 	fmt.Println("item", item)
 
 	err := db.DB.Create(&item)
 	if err != nil {
 		fmt.Println("CreateNewItem", err)
-		return &models.Item{}, errors.New("create new items error")
+		return &models.ItineraryItem{}, errors.New("create new items error")
 	}
 	return item, nil
 }
 
-func (db *Database) UpdateItem(id string, item models.Item) (*models.Item, error) {
+func (db *Database) UpdateItem(id string, item models.ItineraryItem) (*models.ItineraryItem, error) {
 	if id == "" {
 		return nil, errors.New("ID can't be nil")
 	}
@@ -63,12 +64,12 @@ func (db *Database) UpdateItem(id string, item models.Item) (*models.Item, error
 	return nil, nil
 }
 
-func (db *Database) DeleteItem(id string) error {
+func (db *Database) DeleteItineraryItem(id string) error {
 	fmt.Println("id repo", id)
 	if id == "" {
 		return errors.New("ID can't be nil")
 	}
-	var items *models.Item
+	var items *models.ItineraryItem
 	if err := db.DB.Where("id = ?", id).Delete(&items); err != nil {
 		return errors.New("Cannot delete")
 	}

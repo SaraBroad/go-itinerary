@@ -28,7 +28,7 @@ func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	fmt.Println("body", body)
-	var item models.Item
+	var item models.ItineraryItem
 	json.Unmarshal(body, &item)
 
 	_, err = h.service.AddItem(&item)
@@ -51,7 +51,7 @@ func (h *ItemHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {
 func (h *ItemHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 	fmt.Println("id", id)
-	var item *models.Item
+	var item *models.ItineraryItem
 	if id == "" {
 		http.Error(w, "Item not found", http.StatusNotFound)
 	}
@@ -60,7 +60,7 @@ func (h *ItemHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {
 
 func (h *ItemHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}
 
-func indexByID(items []models.Item, id string) int {
+func indexByID(items []models.ItineraryItem, id string) int {
 	for i := 0; i < len(items); i++ {
 		if items[i].ID == id {
 			return i

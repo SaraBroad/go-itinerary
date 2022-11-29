@@ -20,16 +20,16 @@ func NewItemService(iRepo repository.Database) *ItemService {
 }
 
 type database interface {
-	CreateNewItem(item *models.Item) (*models.Item, error)
-	GetItemById(id string) (*models.Item, error)
-	UpdateItem(id string, item models.Item) (*models.Item, error)
-	DeleteItem(id string) error
+	CreateNewItineraryItem(item *models.ItineraryItem) (*models.ItineraryItem, error)
+	GetItineraryItemById(id string) (*models.ItineraryItem, error)
+	UpdateItineraryItem(id string, item models.ItineraryItem) (*models.ItineraryItem, error)
+	DeleteItineraryItem(id string) error
 }
 
-func calculateCategoryCost(category *models.Item) (float64, error) {
-	price := category.Price
+func calculateCategoryCost(catCost *models.ItineraryItem) (float64, error) {
+	price := catCost.Price
 	var cost float64
-	switch category.Category.Name {
+	switch catCost.Category.Name {
 	case "accomodations":
 		cost += price
 	case "activity":
@@ -50,24 +50,24 @@ func calculateTotalCost() (float64, error) {
 	return 0, nil
 }
 
-func (i *ItemService) AddItem(item *models.Item) (*models.Item, error) {
+func (i *ItemService) AddItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {
 
-	newItem, err := i.itemRepo.CreateNewItem(item)
+	newItem, err := i.itemRepo.CreateNewItineraryItem(item)
 	if err != nil {
 		fmt.Println("add item service error")
 	}
 	return newItem, nil
 }
 
-func (i *ItemService) FindItemById(id string) (*models.Item, error) {
-	item, err := i.itemRepo.GetItemById(id)
+func (i *ItemService) FindItemById(id string) (*models.ItineraryItem, error) {
+	item, err := i.itemRepo.GetItineraryItemById(id)
 	if err != nil {
 		fmt.Println("find item by id service error")
 	}
 	return item, nil
 }
 
-func (i *ItemService) Update(id string, item *models.Item) (*models.Item, error) {
+func (i *ItemService) Update(id string, item *models.ItineraryItem) (*models.ItineraryItem, error) {
 	item, err := i.itemRepo.UpdateItem(id, *item)
 	if err != nil {
 		fmt.Println("Update item service error")
@@ -77,7 +77,7 @@ func (i *ItemService) Update(id string, item *models.Item) (*models.Item, error)
 
 func (i *ItemService) RemoveItem(id string) error {
 	fmt.Println("id service", id)
-	if err := i.itemRepo.DeleteItem(id); err != nil {
+	if err := i.itemRepo.DeleteItineraryItem(id); err != nil {
 		fmt.Println("error deleting item in service", err)
 	}
 	return nil
