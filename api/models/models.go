@@ -21,7 +21,7 @@ type ItineraryItem struct {
 	ID           string
 	Name         string
 	Location     Location
-	timeAllotted string
+	TimeAllotted string
 	Price        float64 //TODO:remove
 	Pce          Price
 	Category     Category
@@ -32,9 +32,9 @@ type ItineraryItem struct {
 type Location struct {
 	gorm.Model
 
-	id              string
-	city            string
-	country         string
+	ID              string
+	City            string
+	Country         string
 	ItineraryID     string
 	ItineraryItemID string
 }
@@ -43,9 +43,9 @@ type Price struct {
 	gorm.Model
 
 	ID              string
-	cost            bool //free or paid
-	amount          float64
-	currency        string
+	Cost            bool //free or paid
+	Amount          float64
+	Currency        string
 	ItineraryItemID string
 }
 

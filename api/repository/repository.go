@@ -3,6 +3,7 @@ package repository
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/SaraBroad/go-itinerary/api/models"
 	"gorm.io/gorm"
@@ -19,6 +20,23 @@ type Database struct {
 
 func NewItinerary(db *gorm.DB) Database {
 	return Database{db}
+}
+
+func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error) {
+	i := &models.Itinerary{
+		StartDate:    time.Now(),
+		EndDate:      time.Now(),
+		Destinations: []models.Location{{}},
+		Items: []models.ItineraryItem{{
+			Name: "",
+			Location: models.Location{
+				City: "",
+			},
+		}},
+	}
+	fmt.Println(i)
+
+	return &models.Itinerary{}, nil
 }
 
 func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, error) {
