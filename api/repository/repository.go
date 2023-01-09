@@ -24,19 +24,32 @@ func NewItinerary(db *gorm.DB) Database {
 
 func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error) {
 	i := &models.Itinerary{
-		StartDate:    time.Now(),
-		EndDate:      time.Now(),
-		Destinations: []models.Location{{}},
-		Items: []models.ItineraryItem{{
+		StartDate: time.Now(),
+		EndDate:   time.Now(),
+		Destinations: []*models.Location{{
+			ID:      "",
+			City:    "",
+			Country: "",
+		}},
+		Items: []*models.ItineraryItem{{
 			Name: "",
 			Location: models.Location{
 				City: "",
 			},
+			Pce: &models.Price{
+				ID:              "",
+				IsCost:          true,
+				Amount:          0.00,
+				Currency:        "",
+				ItineraryItemID: "",
+			},
+			Category:  &models.Category{},
+			DayNumber: &models.DayNumber{},
 		}},
 	}
 	fmt.Println(i)
 
-	return &models.Itinerary{}, nil
+	return i, nil
 }
 
 func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, error) {

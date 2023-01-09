@@ -43,7 +43,7 @@ type Price struct {
 	gorm.Model
 
 	ID              string
-	Cost            bool //free or paid
+	IsCost          bool //free or paid
 	Amount          float64
 	Currency        string
 	ItineraryItemID string
