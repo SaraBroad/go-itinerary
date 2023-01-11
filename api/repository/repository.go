@@ -38,7 +38,7 @@ func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error)
 			},
 			Pce: &models.Price{
 				ID:              "",
-				IsCost:          true,
+				IsPaid:          true,
 				Amount:          0.00,
 				Currency:        "",
 				ItineraryItemID: "",
@@ -64,7 +64,10 @@ func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, erro
 	return item, nil
 }
 
-// List itinerary
+func (db *Database) GetItinerary() (*models.Itinerary, error) {
+	return &models.Itinerary{}, nil
+}
+
 func (db *Database) GetAllItinraryItems() ([]*models.ItineraryItem, error) {
 	var items []*models.ItineraryItem
 	if err := db.DB.Find(&items); err != nil {
@@ -73,6 +76,14 @@ func (db *Database) GetAllItinraryItems() ([]*models.ItineraryItem, error) {
 	}
 
 	return items, nil
+}
+
+func (db *Database) GetItineraryItemByID(itemID string) (*models.ItineraryItem, error) {
+	return &models.ItineraryItem{}, nil
+}
+
+func (db *Database) CreateNewItinerary(itinerary *models.Itinerary) (*models.Itinerary, error) {
+	return &models.Itinerary{}, nil
 }
 
 func (db *Database) CreateNewItineraryItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {

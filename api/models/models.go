@@ -11,8 +11,8 @@ type Itinerary struct {
 
 	StartDate    time.Time
 	EndDate      time.Time
-	Destinations []Location      //1:M
-	Items        []ItineraryItem //1:M
+	Destinations []*Location      //1:M
+	Items        []*ItineraryItem //1:M
 }
 
 type ItineraryItem struct {
@@ -23,9 +23,9 @@ type ItineraryItem struct {
 	Location     Location
 	TimeAllotted string
 	Price        float64 //TODO:remove
-	Pce          Price
-	Category     Category
-	DayNumber    DayNumber
+	Pce          *Price
+	Category     *Category
+	DayNumber    *DayNumber
 	ItineraryID  string
 }
 
@@ -43,7 +43,7 @@ type Price struct {
 	gorm.Model
 
 	ID              string
-	IsCost          bool //free or paid
+	IsPaid          bool //free or paid
 	Amount          float64
 	Currency        string
 	ItineraryItemID string
