@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/SaraBroad/go-itinerary/api/models"
+	"github.com/pkg/errors"
 	"gorm.io/gorm"
 )
 
@@ -38,6 +39,9 @@ func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error)
 		}},
 	}
 	fmt.Println(i)
-
+	err := db.DB.Save(&i)
+	if err != nil {
+		return nil, errors.Wrap("problem saving seed")
+	}
 	return i, nil
 }
