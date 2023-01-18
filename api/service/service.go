@@ -9,13 +9,13 @@ import (
 
 // service layer - business logic
 
-type ItemService struct {
-	itemRepo *repository.Database
+type ItineraryService struct {
+	itineraryRepo *repository.Database
 }
 
-func NewItemService(iRepo repository.Database) *ItemService {
-	return &ItemService{
-		itemRepo: &iRepo,
+func NewItemService(iRepo repository.Database) *ItineraryService {
+	return &ItineraryService{
+		itineraryRepo: &iRepo,
 	}
 }
 
@@ -50,34 +50,34 @@ func calculateTotalCost() (float64, error) {
 	return 0, nil
 }
 
-func (i *ItemService) AddItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {
+func (i *ItineraryService) AddItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {
 
-	newItem, err := i.itemRepo.CreateNewItineraryItem(item)
+	newItem, err := i.itineraryRepo.CreateNewItineraryItem(item)
 	if err != nil {
 		fmt.Println("add item service error")
 	}
 	return newItem, nil
 }
 
-func (i *ItemService) FindItemById(id string) (*models.ItineraryItem, error) {
-	item, err := i.itemRepo.GetItineraryItemById(id)
+func (i *ItineraryService) FindItemById(id string) (*models.ItineraryItem, error) {
+	item, err := i.itineraryRepo.GetItineraryItemById(id)
 	if err != nil {
 		fmt.Println("find item by id service error")
 	}
 	return item, nil
 }
 
-func (i *ItemService) Update(id string, item *models.ItineraryItem) (*models.ItineraryItem, error) {
-	item, err := i.itemRepo.UpdateItem(id, *item)
+func (i *ItineraryService) Update(id string, item *models.ItineraryItem) (*models.ItineraryItem, error) {
+	item, err := i.itineraryRepo.UpdateItem(id, *item)
 	if err != nil {
 		fmt.Println("Update item service error")
 	}
 	return item, nil
 }
 
-func (i *ItemService) RemoveItem(id string) error {
+func (i *ItineraryService) RemoveItem(id string) error {
 	fmt.Println("id service", id)
-	if err := i.itemRepo.DeleteItineraryItem(id); err != nil {
+	if err := i.itineraryRepo.DeleteItineraryItem(id); err != nil {
 		fmt.Println("error deleting item in service", err)
 	}
 	return nil

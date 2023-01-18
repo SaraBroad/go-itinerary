@@ -16,10 +16,10 @@ import (
 
 type ItemHandler struct {
 	// DB *repository.Database
-	service service.ItemService
+	service service.ItineraryService
 }
 
-func NewItemHandler(is service.ItemService) *ItemHandler {
+func NewItemHandler(is service.ItineraryService) *ItemHandler {
 	return &ItemHandler{service: is}
 }
 

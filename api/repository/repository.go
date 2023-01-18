@@ -3,16 +3,22 @@ package repository
 import (
 	"errors"
 	"fmt"
-	"time"
 
 	"github.com/SaraBroad/go-itinerary/api/models"
 	"gorm.io/gorm"
 )
 
-// use gorm
-// has one day
-// has one city
-// has one category
+// thinking about splitting this out from here - clean architecture
+type ItineraryStore interface {
+	CreateNewItinerary(itinerary *models.Itinerary) (*models.Itinerary, error)
+	// add other methods
+}
+
+type DB struct {
+	// define DB connection - DB *gorm.DB
+}
+
+// to here-ish
 
 type Database struct {
 	DB *gorm.DB
@@ -22,34 +28,30 @@ func NewItinerary(db *gorm.DB) Database {
 	return Database{db}
 }
 
-func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error) {
-	i := &models.Itinerary{
-		StartDate: time.Now(),
-		EndDate:   time.Now(),
-		Destinations: []*models.Location{{
-			ID:      "",
-			City:    "",
-			Country: "",
-		}},
-		Items: []*models.ItineraryItem{{
-			Name: "",
-			Location: models.Location{
-				City: "",
-			},
-			Pce: &models.Price{
-				ID:              "",
-				IsPaid:          true,
-				Amount:          0.00,
-				Currency:        "",
-				ItineraryItemID: "",
-			},
-			Category:  &models.Category{},
-			DayNumber: &models.DayNumber{},
-		}},
-	}
-	fmt.Println(i)
+func (db *Database) CreateNewItinerary(itinerary *models.Itinerary) (*models.Itinerary, error) {
+	var newItinerary *models.Itinerary
 
-	return i, nil
+	err := db.DB.Create(&newItinerary)
+	if err != nil {
+		return &models.Itinerary{}, errors.New("create new itinerary error")
+	}
+
+	return newItinerary, nil
+}
+
+func (db *Database) CreateNewItineraryItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {
+	fmt.Println("item", item)
+
+	err := db.DB.Create(&item)
+	if err != nil {
+		fmt.Println("CreateNewItem", err)
+		return &models.ItineraryItem{}, errors.New("create new items error")
+	}
+	return item, nil
+}
+
+func (db *Database) GetItinerary(id string) (*models.Itinerary, error) {
+	return &models.Itinerary{}, nil
 }
 
 func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, error) {
@@ -62,10 +64,6 @@ func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, erro
 	}
 
 	return item, nil
-}
-
-func (db *Database) GetItinerary() (*models.Itinerary, error) {
-	return &models.Itinerary{}, nil
 }
 
 func (db *Database) GetAllItinraryItems() ([]*models.ItineraryItem, error) {
@@ -82,21 +80,6 @@ func (db *Database) GetItineraryItemByID(itemID string) (*models.ItineraryItem, 
 	return &models.ItineraryItem{}, nil
 }
 
-func (db *Database) CreateNewItinerary(itinerary *models.Itinerary) (*models.Itinerary, error) {
-	return &models.Itinerary{}, nil
-}
-
-func (db *Database) CreateNewItineraryItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {
-	fmt.Println("item", item)
-
-	err := db.DB.Create(&item)
-	if err != nil {
-		fmt.Println("CreateNewItem", err)
-		return &models.ItineraryItem{}, errors.New("create new items error")
-	}
-	return item, nil
-}
-
 func (db *Database) UpdateItem(id string, item models.ItineraryItem) (*models.ItineraryItem, error) {
 	if id == "" {
 		return nil, errors.New("ID can't be nil")
@@ -104,6 +87,10 @@ func (db *Database) UpdateItem(id string, item models.ItineraryItem) (*models.It
 	db.DB.Model(&item).Where("id = ?", id).Update("name", item.Name)
 
 	return nil, nil
+}
+
+func (db *Database) DeleteItinerary(id string) error {
+	return nil
 }
 
 func (db *Database) DeleteItineraryItem(id string) error {
