@@ -9,6 +9,7 @@ import (
 type Itinerary struct {
 	gorm.Model
 
+	// ID           string
 	StartDate    time.Time
 	EndDate      time.Time
 	Destinations []*Location      //1:M
@@ -18,7 +19,7 @@ type Itinerary struct {
 type ItineraryItem struct {
 	gorm.Model
 
-	ID           string
+	// ID           string
 	Name         string
 	Location     Location
 	TimeAllotted string
@@ -32,7 +33,7 @@ type ItineraryItem struct {
 type Location struct {
 	gorm.Model
 
-	ID              string
+	// ID              string
 	City            string
 	Country         string
 	ItineraryID     string
@@ -42,7 +43,7 @@ type Location struct {
 type Price struct {
 	gorm.Model
 
-	ID              string
+	// ID              string
 	IsPaid          bool //free or paid
 	Amount          float64
 	Currency        string
@@ -52,7 +53,7 @@ type Price struct {
 type Category struct {
 	gorm.Model
 
-	ID              string
+	// CategoryID      string
 	Name            string
 	ItineraryItemID string
 }
@@ -60,7 +61,7 @@ type Category struct {
 type DayNumber struct {
 	gorm.Model
 
-	ID              string
+	// ID              string
 	Num             int64
 	ItineraryItemID string
 }

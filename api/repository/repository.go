@@ -5,7 +5,8 @@ import (
 	"fmt"
 
 	"github.com/SaraBroad/go-itinerary/api/models"
-	"gorm.io/gorm"
+	// "gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 )
 
 // thinking about splitting this out from here - clean architecture
@@ -80,7 +81,16 @@ func (db *Database) GetItineraryItemByID(itemID string) (*models.ItineraryItem, 
 	return &models.ItineraryItem{}, nil
 }
 
-func (db *Database) UpdateItem(id string, item models.ItineraryItem) (*models.ItineraryItem, error) {
+func (db *Database) UpdateItinerary(id string, item models.ItineraryItem) (*models.ItineraryItem, error) {
+	if id == "" {
+		return nil, errors.New("ID can't be nil")
+	}
+	db.DB.Model(&item).Where("id = ?", id).Update("name", item.Name)
+
+	return nil, nil
+}
+
+func (db *Database) UpdateItineraryItem(id string, item models.ItineraryItem) (*models.ItineraryItem, error) {
 	if id == "" {
 		return nil, errors.New("ID can't be nil")
 	}

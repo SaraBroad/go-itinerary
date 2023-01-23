@@ -62,7 +62,7 @@ func (h *ItemHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}
 
 func indexByID(items []models.ItineraryItem, id string) int {
 	for i := 0; i < len(items); i++ {
-		if items[i].ID == id {
+		if items[i].ItineraryID == id {
 			return i
 		}
 	}

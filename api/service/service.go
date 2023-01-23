@@ -68,7 +68,7 @@ func (i *ItineraryService) FindItemById(id string) (*models.ItineraryItem, error
 }
 
 func (i *ItineraryService) Update(id string, item *models.ItineraryItem) (*models.ItineraryItem, error) {
-	item, err := i.itineraryRepo.UpdateItem(id, *item)
+	item, err := i.itineraryRepo.UpdateItinerary(id, *item)
 	if err != nil {
 		fmt.Println("Update item service error")
 	}

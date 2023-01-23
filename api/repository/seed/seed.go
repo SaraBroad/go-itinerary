@@ -18,7 +18,7 @@ func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error)
 		StartDate: time.Now(),
 		EndDate:   time.Now(),
 		Destinations: []*models.Location{{
-			ID:      "",
+			// ID:      "",
 			City:    "",
 			Country: "",
 		}},
@@ -28,7 +28,7 @@ func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error)
 				City: "",
 			},
 			Pce: &models.Price{
-				ID:              "",
+				// ID:              "",
 				IsPaid:          true,
 				Amount:          0.00,
 				Currency:        "",
@@ -41,7 +41,7 @@ func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error)
 	fmt.Println(i)
 	err := db.DB.Save(&i)
 	if err != nil {
-		return nil, errors.Wrap("problem saving seed")
+		return nil, errors.Wrap(err.Error, "problem saving seed")
 	}
 	return i, nil
 }
