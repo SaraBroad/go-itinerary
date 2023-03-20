@@ -26,25 +26,25 @@ type database interface {
 	DeleteItineraryItem(id string) error
 }
 
-func calculateCategoryCost(catCost *models.ItineraryItem) (float64, error) {
-	price := catCost.Price
-	var cost float64
-	switch catCost.Category.Name {
-	case "accomodations":
-		cost += price
-	case "activity":
-		cost += price
-	case "transportation":
-		cost += price
-	case "shopping":
-		cost += price
-	case "food":
-		cost += price
-	default:
-		fmt.Println("unknown category")
-	}
-	return cost, nil
-}
+// func calculateCategoryCost(catCost *models.ItineraryItem) (float64, error) {
+// 	price := catCost.Price
+// 	var cost float64
+// 	switch catCost.Category.Name {
+// 	case "accomodations":
+// 		cost += price
+// 	case "activity":
+// 		cost += price
+// 	case "transportation":
+// 		cost += price
+// 	case "shopping":
+// 		cost += price
+// 	case "food":
+// 		cost += price
+// 	default:
+// 		fmt.Println("unknown category")
+// 	}
+// 	return cost, nil
+// }
 
 func calculateTotalCost() (float64, error) {
 	return 0, nil

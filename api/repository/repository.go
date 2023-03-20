@@ -5,6 +5,8 @@ import (
 	"fmt"
 
 	"github.com/SaraBroad/go-itinerary/api/models"
+	"github.com/google/uuid"
+
 	// "gorm.io/gorm"
 	"github.com/jinzhu/gorm"
 )
@@ -85,6 +87,13 @@ func (db *Database) UpdateItinerary(id string, item models.ItineraryItem) (*mode
 	if id == "" {
 		return nil, errors.New("ID can't be nil")
 	}
+
+	// for k := 0; k < len(items); k++ {
+	// 	if item.itinerary[k].ID == id {
+	// 		item.itinerary[k].Field = item.Field
+	// 		return nil
+	// 	}
+	// }
 	db.DB.Model(&item).Where("id = ?", id).Update("name", item.Name)
 
 	return nil, nil
@@ -113,4 +122,12 @@ func (db *Database) DeleteItineraryItem(id string) error {
 		return errors.New("Cannot delete")
 	}
 	return nil
+}
+
+func (db *Database) CreateNewLocation(loc *models.Location) (*models.Location, error) {
+	i := &models.Location{
+		ID: uuid.NewString(),
+	}
+
+	return i, nil
 }

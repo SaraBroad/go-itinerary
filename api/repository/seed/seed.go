@@ -18,7 +18,6 @@ func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error)
 		StartDate: time.Now(),
 		EndDate:   time.Now(),
 		Destinations: []*models.Location{{
-			// ID:      "",
 			City:    "",
 			Country: "",
 		}},
@@ -27,9 +26,8 @@ func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error)
 			Location: models.Location{
 				City: "",
 			},
-			Pce: &models.Price{
-				// ID:              "",
-				IsPaid:          true,
+			Price: &models.Price{
+				IsFree:          true,
 				Amount:          0.00,
 				Currency:        "",
 				ItineraryItemID: "",

@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/SaraBroad/go-itinerary/api/handler"
 	"github.com/SaraBroad/go-itinerary/api/repository"
@@ -19,21 +18,25 @@ var port = "8080"
 
 func main() {
 
-	err := godotenv.Load("../.env")
+	// err := godotenv.Load("../.env")
 
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
+	// if err != nil {
+	// 	log.Fatalf("Error loading .env file")
+	// }
 
-	db := repository.InitDatabase(&repository.Auth{
-		Username: os.Getenv("USERNAME"),
-		Host:     os.Getenv("HOST"),
-		Password: os.Getenv("PASSWORD"),
-		DBName:   os.Getenv("DBNAME"),
-		Port:     os.Getenv("PORT"),
-		SSL:      os.Getenv("SSL"),
-		Timezone: os.Getenv("TIMEZONE"),
-	})
+	godotenv.Load()
+
+	// db := repository.InitDatabase(&repository.Auth{
+	// 	Username: os.Getenv("USERNAME"),
+	// 	Host:     os.Getenv("HOST"),
+	// 	Password: os.Getenv("PASSWORD"),
+	// 	DBName:   os.Getenv("DBNAME"),
+	// 	Port:     os.Getenv("PORT"),
+	// 	SSL:      os.Getenv("SSL"),
+	// 	// Timezone: os.Getenv("TIMEZONE"),
+	// })
+
+	db := repository.ConnectDatabase()
 
 	ir := repository.NewItinerary(db)
 	is := service.NewItemService(ir)
