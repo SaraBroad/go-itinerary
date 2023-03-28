@@ -7,8 +7,7 @@ import (
 	"github.com/SaraBroad/go-itinerary/api/models"
 	"github.com/google/uuid"
 
-	// "gorm.io/gorm"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 // thinking about splitting this out from here - clean architecture
