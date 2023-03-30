@@ -37,7 +37,11 @@ func main() {
 	// })
 
 	db := repository.ConnectDatabase()
-
+	// s := seed.Database{}
+	// _, err := s.Seed()
+	// if err != nil {
+	// 	fmt.Println("seed error")
+	// }
 	ir := repository.NewItinerary(db)
 	is := service.NewItemService(ir)
 	ih := handler.NewItemHandler(*is)

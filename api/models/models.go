@@ -8,7 +8,8 @@ import (
 
 type Itinerary struct {
 	gorm.Model
-	ItineraryID  string `json:"itinerary_id" gorm:"primary_key"`
+
+	// ItineraryID  string `json:"itinerary_id" gorm:"primary_key"`
 	StartDate    time.Time
 	EndDate      time.Time
 	Destinations []*Location      //1:M `gorm:"foreignKey:LocationID"`
@@ -17,7 +18,7 @@ type Itinerary struct {
 
 type ItineraryItem struct {
 	gorm.Model
-
+	ID           string `gorm:"primary_key"`
 	Name         string `json:"name"`
 	Location     Location
 	TimeAllotted string
@@ -39,8 +40,8 @@ type Location struct {
 
 type Price struct {
 	gorm.Model
-
-	IsFree          bool //free or paid
+	ID              string `gorm:"primary_key"`
+	IsFree          bool   //free or paid
 	Amount          float64
 	Currency        string
 	ItineraryItemID string
@@ -48,14 +49,14 @@ type Price struct {
 
 type Category struct {
 	gorm.Model
-
+	ID              string `gorm:"primary_key"`
 	Name            string
 	ItineraryItemID string
 }
 
 type DayNumber struct {
 	gorm.Model
-
+	ID              string `gorm:"primary_key"`
 	Num             int64
 	ItineraryItemID string
 }

@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/SaraBroad/go-itinerary/api/models"
-	"github.com/google/uuid"
 
 	"gorm.io/gorm"
 )
@@ -125,7 +124,7 @@ func (db *Database) DeleteItineraryItem(id string) error {
 
 func (db *Database) CreateNewLocation(loc *models.Location) (*models.Location, error) {
 	i := &models.Location{
-		ID: uuid.NewString(),
+		// ID: uuid.NewString(),
 	}
 
 	return i, nil

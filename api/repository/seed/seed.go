@@ -13,27 +13,32 @@ type Database struct {
 	DB *gorm.DB
 }
 
-func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error) {
+func (db *Database) Seed() (*models.Itinerary, error) {
+	// func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error) {
 	i := &models.Itinerary{
 		StartDate: time.Now(),
 		EndDate:   time.Now(),
 		Destinations: []*models.Location{{
-			City:    "",
-			Country: "",
+			City:    "London",
+			Country: "England",
 		}},
 		Items: []*models.ItineraryItem{{
-			Name: "",
+			Name: "British Museum",
 			Location: models.Location{
-				City: "",
+				City: "London",
 			},
 			Price: &models.Price{
-				IsFree:          true,
-				Amount:          0.00,
-				Currency:        "",
-				ItineraryItemID: "",
+				IsFree:   true,
+				Amount:   0.00,
+				Currency: "",
+				// ItineraryItemID: "",
 			},
-			Category:  &models.Category{},
-			DayNumber: &models.DayNumber{},
+			Category: &models.Category{
+				Name: "activity",
+			},
+			DayNumber: &models.DayNumber{
+				Num: 3,
+			},
 		}},
 	}
 	fmt.Println(i)
