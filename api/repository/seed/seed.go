@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/SaraBroad/go-itinerary/api/models"
+	"github.com/google/uuid"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 )
@@ -16,9 +17,10 @@ type Database struct {
 func (db *Database) Seed() (*models.Itinerary, error) {
 	// func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error) {
 	i := &models.Itinerary{
+		ID:        uuid.NewString(),
 		StartDate: time.Now(),
 		EndDate:   time.Now(),
-		Destinations: []*models.Location{{
+		Locations: []*models.Location{{
 			City:    "London",
 			Country: "England",
 		}},

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -8,34 +9,14 @@ import (
 	"github.com/SaraBroad/go-itinerary/api/repository"
 	"github.com/SaraBroad/go-itinerary/api/service"
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 )
 
 // instatiate http server
 // routes - mux
 
-var port = "8080"
+// var port = "8080"
 
 func main() {
-
-	// err := godotenv.Load("../.env")
-
-	// if err != nil {
-	// 	log.Fatalf("Error loading .env file")
-	// }
-
-	godotenv.Load()
-
-	// db := repository.InitDatabase(&repository.Auth{
-	// 	Username: os.Getenv("USERNAME"),
-	// 	Host:     os.Getenv("HOST"),
-	// 	Password: os.Getenv("PASSWORD"),
-	// 	DBName:   os.Getenv("DBNAME"),
-	// 	Port:     os.Getenv("PORT"),
-	// 	SSL:      os.Getenv("SSL"),
-	// 	// Timezone: os.Getenv("TIMEZONE"),
-	// })
-
 	db := repository.ConnectDatabase()
 	// s := seed.Database{}
 	// _, err := s.Seed()
@@ -49,15 +30,20 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/items", ih.AddItem).Methods("POST")
 	router.HandleFunc("/items/{id}", ih.RemoveItem).Methods("DELETE")
+	router.HandleFunc("/health-check", HealthCheck).Methods("GET")
 	http.Handle("/", router)
 
 	log.Println("http server runs on :8080")
 	http.ListenAndServe(":8080", router)
-
-	log.Printf("Server started at port %v", port)
 }
 
 // reader := bufio.NewReader(os.Stdin)
 // fmt.Print("Enter text: ")
 // text, _ := reader.ReadString('\n')
 // fmt.Println(text)
+
+func HealthCheck(w http.ResponseWriter, r *http.Request) {
+	log.Println("entering health check end point")
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "API is up and running")
+}

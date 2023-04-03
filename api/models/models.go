@@ -9,11 +9,11 @@ import (
 type Itinerary struct {
 	gorm.Model
 
-	// ItineraryID  string `json:"itinerary_id" gorm:"primary_key"`
-	StartDate    time.Time
-	EndDate      time.Time
-	Destinations []*Location      //1:M `gorm:"foreignKey:LocationID"`
-	Items        []*ItineraryItem //1:M
+	ID        string `gorm:"primary_key"`
+	StartDate time.Time
+	EndDate   time.Time
+	Locations []*Location      //1:M `gorm:"foreignKey:LocationID"`
+	Items     []*ItineraryItem //1:M
 }
 
 type ItineraryItem struct {

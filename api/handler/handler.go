@@ -19,8 +19,8 @@ type ItemHandler struct {
 	service service.ItineraryService
 }
 
-func NewItemHandler(is service.ItineraryService) *ItemHandler {
-	return &ItemHandler{service: is}
+func NewItemHandler(svc service.ItineraryService) *ItemHandler {
+	return &ItemHandler{service: svc}
 }
 
 func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
