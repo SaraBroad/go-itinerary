@@ -11,11 +11,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// instatiate http server
-// routes - mux
-
-// var port = "8080"
-
 func main() {
 	db := repository.ConnectDatabase()
 	// s := seed.Database{}
@@ -25,7 +20,7 @@ func main() {
 	// }
 	ir := repository.NewItinerary(db)
 	is := service.NewItineraryService(ir)
-	ih := handler.NewItineraryHandler(*is)
+	ih := handler.NewItemHandler(*is)
 
 	router := mux.NewRouter()
 	router.HandleFunc("/items", ih.AddItem).Methods("POST")
