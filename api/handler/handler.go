@@ -14,16 +14,16 @@ import (
 
 // http layer
 
-type ItemHandler struct {
+type ItineraryHandler struct {
 	// DB *repository.Database
 	service service.ItineraryService
 }
 
-func NewItemHandler(svc service.ItineraryService) *ItemHandler {
-	return &ItemHandler{service: svc}
+func NewItemHandler(svc service.ItineraryService) *ItineraryHandler {
+	return &ItineraryHandler{service: svc}
 }
 
-func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
+func (h *ItineraryHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
@@ -40,7 +40,7 @@ func (h *ItemHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Successfully Added"))
 }
 
-func (h *ItemHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {
+func (h *ItineraryHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 	fmt.Println("id", id)
 	if err := h.service.RemoveItem(id); err != nil {
@@ -48,7 +48,7 @@ func (h *ItemHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *ItemHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {
+func (h *ItineraryHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 	fmt.Println("id", id)
 	var item *models.ItineraryItem
@@ -58,7 +58,7 @@ func (h *ItemHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("item", item)
 }
 
-func (h *ItemHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}
+func (h *ItineraryHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}
 
 func indexByID(items []models.ItineraryItem, id string) int {
 	for i := 0; i < len(items); i++ {

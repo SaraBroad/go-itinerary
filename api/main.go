@@ -24,7 +24,7 @@ func main() {
 	// 	fmt.Println("seed error")
 	// }
 	ir := repository.NewItinerary(db)
-	is := service.NewItemService(ir)
+	is := service.NewItineraryService(ir)
 	ih := handler.NewItemHandler(*is)
 
 	router := mux.NewRouter()

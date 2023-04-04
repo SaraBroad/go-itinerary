@@ -37,6 +37,7 @@ func (db *Database) CreateNewItinerary(itinerary *models.Itinerary) (*models.Iti
 		return &models.Itinerary{}, errors.New("create new itinerary error")
 	}
 
+	fmt.Println("new itinerary", newItinerary)
 	return newItinerary, nil
 }
 

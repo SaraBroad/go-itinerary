@@ -10,6 +10,7 @@ type Itinerary struct {
 	gorm.Model
 
 	ID        string `gorm:"primary_key"`
+	Name      string
 	StartDate time.Time
 	EndDate   time.Time
 	Locations []*Location      //1:M `gorm:"foreignKey:LocationID"`

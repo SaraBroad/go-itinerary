@@ -5,6 +5,7 @@ import (
 
 	"github.com/SaraBroad/go-itinerary/api/models"
 	"github.com/SaraBroad/go-itinerary/api/repository"
+	"github.com/pkg/errors"
 )
 
 // service layer - business logic
@@ -13,18 +14,18 @@ type ItineraryService struct {
 	itineraryRepo *repository.Database
 }
 
-func NewItemService(iRepo repository.Database) *ItineraryService {
+func NewItineraryService(iRepo repository.Database) *ItineraryService {
 	return &ItineraryService{
 		itineraryRepo: &iRepo,
 	}
 }
 
-type database interface {
-	CreateNewItineraryItem(item *models.ItineraryItem) (*models.ItineraryItem, error)
-	GetItineraryItemById(id string) (*models.ItineraryItem, error)
-	UpdateItineraryItem(id string, item models.ItineraryItem) (*models.ItineraryItem, error)
-	DeleteItineraryItem(id string) error
-}
+// type database interface {
+// 	CreateNewItineraryItem(item *models.ItineraryItem) (*models.ItineraryItem, error)
+// 	GetItineraryItemById(id string) (*models.ItineraryItem, error)
+// 	UpdateItineraryItem(id string, item models.ItineraryItem) (*models.ItineraryItem, error)
+// 	DeleteItineraryItem(id string) error
+// }
 
 // func calculateCategoryCost(catCost *models.ItineraryItem) (float64, error) {
 // 	price := catCost.Price
@@ -50,11 +51,20 @@ func calculateTotalCost() (float64, error) {
 	return 0, nil
 }
 
+func (i *ItineraryService) AddItinerary(itinerary *models.Itinerary) (*models.Itinerary, error) {
+	newItinerary, err := i.itineraryRepo.CreateNewItinerary(itinerary)
+	if err != nil {
+		return nil, errors.Wrap(err, "add itinerary error")
+	}
+
+	return newItinerary, nil
+}
+
 func (i *ItineraryService) AddItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {
 
 	newItem, err := i.itineraryRepo.CreateNewItineraryItem(item)
 	if err != nil {
-		fmt.Println("add item service error")
+		return nil, errors.Wrap(err, "add item service error")
 	}
 	return newItem, nil
 }
@@ -62,7 +72,7 @@ func (i *ItineraryService) AddItem(item *models.ItineraryItem) (*models.Itinerar
 func (i *ItineraryService) FindItemById(id string) (*models.ItineraryItem, error) {
 	item, err := i.itineraryRepo.GetItineraryItemById(id)
 	if err != nil {
-		fmt.Println("find item by id service error")
+		return nil, errors.Wrap(err, "find item by id service error")
 	}
 	return item, nil
 }
