@@ -25,7 +25,7 @@ func main() {
 	// }
 	ir := repository.NewItinerary(db)
 	is := service.NewItineraryService(ir)
-	ih := handler.NewItemHandler(*is)
+	ih := handler.NewItineraryHandler(*is)
 
 	router := mux.NewRouter()
 	router.HandleFunc("/items", ih.AddItem).Methods("POST")
