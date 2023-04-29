@@ -52,6 +52,7 @@ func calculateTotalCost() (float64, error) {
 }
 
 func (i *ItineraryService) AddItinerary(itinerary *models.Itinerary) (*models.Itinerary, error) {
+	fmt.Println("service itinerary", itinerary)
 	newItinerary, err := i.itineraryRepo.CreateNewItinerary(itinerary)
 	if err != nil {
 		return nil, errors.Wrap(err, "add itinerary error")

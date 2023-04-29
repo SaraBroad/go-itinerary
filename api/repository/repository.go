@@ -30,6 +30,7 @@ func NewItinerary(db *gorm.DB) Database {
 }
 
 func (db *Database) CreateNewItinerary(itinerary *models.Itinerary) (*models.Itinerary, error) {
+	fmt.Println("itinerary", itinerary.Name)
 	var newItinerary *models.Itinerary
 
 	err := db.DB.Create(&newItinerary)
@@ -37,7 +38,6 @@ func (db *Database) CreateNewItinerary(itinerary *models.Itinerary) (*models.Iti
 		return &models.Itinerary{}, errors.New("create new itinerary error")
 	}
 
-	fmt.Println("new itinerary", newItinerary)
 	return newItinerary, nil
 }
 
@@ -58,11 +58,11 @@ func (db *Database) GetItinerary(id string) (*models.Itinerary, error) {
 
 func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, error) {
 	if id == "" {
-		return nil, errors.New("ID can't be nil")
+		return nil, errors.New("id can't be nil")
 	}
 	var item *models.ItineraryItem
 	if err := db.DB.Where("id = ?", id).First(&item); err != nil {
-		return nil, errors.New("Can't find this item")
+		return nil, errors.New("can't find this item")
 	}
 
 	return item, nil

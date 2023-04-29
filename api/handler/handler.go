@@ -13,7 +13,6 @@ import (
 )
 
 // http layer
-
 type ItineraryHandler struct {
 	// DB *repository.Database
 	service service.ItineraryService
@@ -23,10 +22,33 @@ func NewItemHandler(svc service.ItineraryService) *ItineraryHandler {
 	return &ItineraryHandler{service: svc}
 }
 
+func (h *ItineraryHandler) AddItinerary(w http.ResponseWriter, r *http.Request) {
+	var itinerary *models.Itinerary
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Println(errors.New("item not added"))
+	}
+	err = json.Unmarshal(body, &itinerary)
+	fmt.Println("handler", itinerary.Name)
+
+	if err != nil {
+		fmt.Println(errors.New("cannot unmarshal new itinerary"))
+	}
+	_, err = h.service.AddItinerary(itinerary)
+	if err != nil {
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+	w.Write([]byte("Successfully added"))
+}
+
 func (h *ItineraryHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 
-	defer r.Body.Close()
+	// defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return
+	}
 	fmt.Println("body", body)
 	var item models.ItineraryItem
 	json.Unmarshal(body, &item)

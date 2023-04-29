@@ -26,6 +26,7 @@ func main() {
 	router.HandleFunc("/items", ih.AddItem).Methods("POST")
 	router.HandleFunc("/items/{id}", ih.RemoveItem).Methods("DELETE")
 	router.HandleFunc("/health-check", HealthCheck).Methods("GET")
+	router.HandleFunc("/itinerary", ih.AddItinerary).Methods("POST")
 	http.Handle("/", router)
 
 	log.Println("http server runs on :8080")

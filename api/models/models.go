@@ -9,18 +9,20 @@ import (
 type Itinerary struct {
 	gorm.Model
 
-	ID        string `gorm:"primary_key"`
-	Name      string
-	StartDate time.Time
-	EndDate   time.Time
-	Locations []*Location      //1:M `gorm:"foreignKey:LocationID"`
-	Items     []*ItineraryItem //1:M
+	ID        string    `gorm:"primary_key" json:"id"`
+	Name      string    `json:"itinerary_name"`
+	StartDate time.Time `json:"start_date"`
+	EndDate   time.Time `json:"end_date"`
+	//1:M `gorm:"foreignKey:LocationID"
+	Locations []*Location `json:"locations"`
+	//1:M
+	Items []*ItineraryItem `json:"items"`
 }
 
 type ItineraryItem struct {
 	gorm.Model
 	ID           string `gorm:"primary_key"`
-	Name         string `json:"name"`
+	Name         string `json:"item_name"`
 	Location     Location
 	TimeAllotted string
 	// Price        float64 //TODO:remove
