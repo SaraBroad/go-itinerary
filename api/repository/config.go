@@ -4,14 +4,16 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/SaraBroad/go-itinerary/api/models"
 	// "github.com/jinzhu/gorm"
-	// _ "github.com/lib/pq"
+
+	"github.com/SaraBroad/go-itinerary/api/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func ConnectDatabase() *gorm.DB {
+	// _ = godotenv.Load("")
+
 	dburl := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 		os.Getenv("HOST"),
 		os.Getenv("USERNAME"),
@@ -19,7 +21,7 @@ func ConnectDatabase() *gorm.DB {
 		os.Getenv("DBNAME"),
 		os.Getenv("PORT"),
 	)
-
+	fmt.Println(dburl)
 	db, err := gorm.Open(postgres.Open(dburl), &gorm.Config{})
 	// db, err := gorm.Open("postgres", dburl)
 	if err != nil {
@@ -28,6 +30,7 @@ func ConnectDatabase() *gorm.DB {
 
 	// defer db.Close()
 	db.AutoMigrate(&models.Itinerary{}, &models.ItineraryItem{}, &models.Location{}, &models.Category{}, &models.Price{}, &models.DayNumber{})
-
+	t, _ := db.Migrator().GetTables()
+	fmt.Println("tables", t)
 	return db
 }
