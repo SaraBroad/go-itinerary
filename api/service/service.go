@@ -61,11 +61,12 @@ func (i *ItineraryService) AddItinerary(itinerary *models.Itinerary) (*models.It
 }
 
 func (i *ItineraryService) GetItineraryById(id string) (*models.Itinerary, error) {
+	fmt.Println(id)
 	itinerary, err := i.itineraryRepo.FetchItinerary(id)
 	if err != nil {
 		return nil, errors.Wrap(err, "get itinerary by error")
 	}
-
+	fmt.Println("itinerary", itinerary)
 	return itinerary, nil
 }
 

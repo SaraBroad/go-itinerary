@@ -37,10 +37,21 @@ func (db *Database) CreateNewItinerary(itinerary *models.Itinerary) (*models.Iti
 }
 
 func (db *Database) FetchItinerary(id string) (*models.Itinerary, error) {
+	fmt.Println("repo id", id)
 	var itinerary *models.Itinerary
-	if err := db.DB.First(&itinerary, id); err != nil {
-		return &models.Itinerary{}, errors.New("fetch itinerary by id error")
+	// if err := db.DB.First(&itinerary, "id = ?", id); err != nil {
+
+	// 	// if err := db.DB.First(&itinerary, "id = ?", id); err != nil {
+	// 	fmt.Println("err", err.Error)
+	// 	return &models.Itinerary{}, errors.New("fetch itinerary by id error")
+	// }
+	err := db.DB.First(&itinerary, "id = ?", id)
+	fmt.Println("error", err.Error)
+	if err.Error != nil {
+		return nil, errors.New("error")
 	}
+	fmt.Println("here")
+	fmt.Println("itinerary repo", itinerary)
 	return itinerary, nil
 }
 
