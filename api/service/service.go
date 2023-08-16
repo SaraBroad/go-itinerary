@@ -70,6 +70,15 @@ func (i *ItineraryService) GetItineraryById(id string) (*models.Itinerary, error
 	return itinerary, nil
 }
 
+func (i *ItineraryService) GetAllItineraries() ([]*models.Itinerary, error) {
+	itineraries, err := i.itineraryRepo.FetchAllItineraries()
+	if err != nil {
+		return nil, errors.Wrap(err, "get itineraries by error")
+	}
+	fmt.Println("itinerary", itineraries)
+	return itineraries, nil
+}
+
 func (i *ItineraryService) AddItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {
 
 	newItem, err := i.itineraryRepo.CreateNewItineraryItem("", item)

@@ -99,6 +99,11 @@ func (h *ItineraryHandler) GetItemByItemId(w http.ResponseWriter, r *http.Reques
 
 func (h *ItineraryHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}
 
+func (h *ItineraryHandler) GetAllItineraries(w http.ResponseWriter, r *http.Request) {
+	// var itineraries []*models.Itinerary
+
+}
+
 func indexByID(items []models.ItineraryItem, id string) int {
 	for i := 0; i < len(items); i++ {
 		if items[i].ItineraryID == id {

@@ -55,6 +55,17 @@ func (db *Database) FetchItinerary(id string) (*models.Itinerary, error) {
 	return itinerary, nil
 }
 
+func (db *Database) FetchAllItineraries() ([]*models.Itinerary, error) {
+	var itineraries []*models.Itinerary
+	err := db.DB.Find(&itineraries)
+	fmt.Println("error", err.Error)
+	if err.Error != nil {
+		return nil, errors.New("error")
+	}
+	fmt.Println("itineraries", itineraries)
+	return itineraries, nil
+}
+
 func (db *Database) CreateNewItineraryItem(itineraryId string, item *models.ItineraryItem) (*models.ItineraryItem, error) {
 	// get itinerary by id
 	// create item within itinerary
