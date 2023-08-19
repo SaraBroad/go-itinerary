@@ -3,8 +3,8 @@ package service
 import (
 	"fmt"
 
-	"github.com/SaraBroad/go-itinerary/api/models"
-	"github.com/SaraBroad/go-itinerary/api/repository"
+	"github.com/SaraBroad/go-itinerary/api/domain/entity"
+	"github.com/SaraBroad/go-itinerary/api/domain/repository"
 	"github.com/pkg/errors"
 )
 
@@ -21,9 +21,9 @@ func NewItineraryService(iRepo repository.Database) *ItineraryService {
 }
 
 type database interface {
-	CreateNewItineraryItem(item *models.ItineraryItem) (*models.ItineraryItem, error)
-	GetItineraryItemById(id string) (*models.ItineraryItem, error)
-	UpdateItineraryItem(id string, item models.ItineraryItem) (*models.ItineraryItem, error)
+	CreateNewItineraryItem(item *entity.ItineraryItem) (*entity.ItineraryItem, error)
+	GetItineraryItemById(id string) (*entity.ItineraryItem, error)
+	UpdateItineraryItem(id string, item entity.ItineraryItem) (*entity.ItineraryItem, error)
 	DeleteItineraryItem(id string) error
 }
 
@@ -51,7 +51,7 @@ func calculateTotalCost() (float64, error) {
 	return 0, nil
 }
 
-func (i *ItineraryService) AddItinerary(itinerary *models.Itinerary) (*models.Itinerary, error) {
+func (i *ItineraryService) AddItinerary(itinerary *entity.Itinerary) (*entity.Itinerary, error) {
 	newItinerary, err := i.itineraryRepo.CreateNewItinerary(itinerary)
 	if err != nil {
 		return nil, errors.Wrap(err, "add itinerary error")
@@ -60,7 +60,7 @@ func (i *ItineraryService) AddItinerary(itinerary *models.Itinerary) (*models.It
 	return newItinerary, nil
 }
 
-func (i *ItineraryService) GetItineraryById(id string) (*models.Itinerary, error) {
+func (i *ItineraryService) GetItineraryById(id string) (*entity.Itinerary, error) {
 	fmt.Println(id)
 	itinerary, err := i.itineraryRepo.FetchItinerary(id)
 	if err != nil {
@@ -70,7 +70,7 @@ func (i *ItineraryService) GetItineraryById(id string) (*models.Itinerary, error
 	return itinerary, nil
 }
 
-func (i *ItineraryService) GetAllItineraries() ([]*models.Itinerary, error) {
+func (i *ItineraryService) GetAllItineraries() ([]*entity.Itinerary, error) {
 	itineraries, err := i.itineraryRepo.FetchAllItineraries()
 	if err != nil {
 		return nil, errors.Wrap(err, "get itineraries by error")
@@ -79,7 +79,7 @@ func (i *ItineraryService) GetAllItineraries() ([]*models.Itinerary, error) {
 	return itineraries, nil
 }
 
-func (i *ItineraryService) AddItem(item *models.ItineraryItem) (*models.ItineraryItem, error) {
+func (i *ItineraryService) AddItem(item *entity.ItineraryItem) (*entity.ItineraryItem, error) {
 
 	newItem, err := i.itineraryRepo.CreateNewItineraryItem("", item)
 	if err != nil {
@@ -88,7 +88,7 @@ func (i *ItineraryService) AddItem(item *models.ItineraryItem) (*models.Itinerar
 	return newItem, nil
 }
 
-func (i *ItineraryService) FindItemById(id string) (*models.ItineraryItem, error) {
+func (i *ItineraryService) FindItemById(id string) (*entity.ItineraryItem, error) {
 	item, err := i.itineraryRepo.GetItineraryItemById(id)
 	if err != nil {
 		return nil, errors.Wrap(err, "find item by id service error")
@@ -96,7 +96,7 @@ func (i *ItineraryService) FindItemById(id string) (*models.ItineraryItem, error
 	return item, nil
 }
 
-func (i *ItineraryService) Update(id string, item *models.ItineraryItem) (*models.ItineraryItem, error) {
+func (i *ItineraryService) Update(id string, item *entity.ItineraryItem) (*entity.ItineraryItem, error) {
 	item, err := i.itineraryRepo.UpdateItinerary(id, *item)
 	if err != nil {
 		fmt.Println("Update item service error")

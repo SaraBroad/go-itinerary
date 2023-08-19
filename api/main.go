@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/SaraBroad/go-itinerary/api/domain/repository"
 	"github.com/SaraBroad/go-itinerary/api/handler"
-	"github.com/SaraBroad/go-itinerary/api/repository"
 	"github.com/SaraBroad/go-itinerary/api/service"
 	"github.com/gorilla/mux"
 )
@@ -19,6 +19,7 @@ func main() {
 	// 	fmt.Println("seed error")
 	// }
 	ir := repository.NewItinerary(db)
+	fmt.Println("ir", ir)
 	is := service.NewItineraryService(ir)
 	ih := handler.NewItemHandler(*is)
 	// fmt.Println("ih", ih.GetItinerary)

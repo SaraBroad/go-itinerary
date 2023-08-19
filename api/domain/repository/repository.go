@@ -4,18 +4,23 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/SaraBroad/go-itinerary/api/models"
+	models "github.com/SaraBroad/go-itinerary/api/domain/entity"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
-// thinking about splitting this out from here - clean architecture
-type ItineraryStore interface {
-	// CreateNewItinerary(itinerary *models.Itinerary) (*models.Itinerary, error)
-	// add other methods
+type ItineraryRepository interface {
+	CreateNewItinerary(itinerary *models.Itinerary) (*models.Itinerary, error)
+	FetchItinerary(id string) (*models.Itinerary, error)
+	FetchAllItineraries() ([]*models.Itinerary, error)
+	CreateNewItineraryItem(itineraryId string, item *models.ItineraryItem) (*models.ItineraryItem, error)
+	GetItineraryItemById(id string) (*models.ItineraryItem, error)
+	GetAllItinraryItemsByItineraryId() ([]*models.ItineraryItem, error)
+	UpdateItinerary(id string, item models.ItineraryItem) (*models.ItineraryItem, error)
+	UpdateItineraryItem(id string, item models.ItineraryItem) (*models.ItineraryItem, error)
+	DeleteItineraryItem(id string) error
+	CreateNewLocation(loc *models.Location) (*models.Location, error)
 }
-
-// to here-ish
 
 type Database struct {
 	DB *gorm.DB
@@ -90,7 +95,7 @@ func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, erro
 	return item, nil
 }
 
-func (db *Database) GetAllItinraryItems() ([]*models.ItineraryItem, error) {
+func (db *Database) GetAllItinraryItemsByItineraryId() ([]*models.ItineraryItem, error) {
 	var items []*models.ItineraryItem
 	if err := db.DB.Find(&items); err != nil {
 		fmt.Println("GetAllItems err", err)
@@ -98,10 +103,6 @@ func (db *Database) GetAllItinraryItems() ([]*models.ItineraryItem, error) {
 	}
 
 	return items, nil
-}
-
-func (db *Database) GetItineraryItemByID(itemID string) (*models.ItineraryItem, error) {
-	return &models.ItineraryItem{}, nil
 }
 
 func (db *Database) UpdateItinerary(id string, item models.ItineraryItem) (*models.ItineraryItem, error) {

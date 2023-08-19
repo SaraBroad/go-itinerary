@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/SaraBroad/go-itinerary/api/models"
+	"github.com/SaraBroad/go-itinerary/api/domain/entity"
 	"github.com/SaraBroad/go-itinerary/api/service"
 	"github.com/gorilla/mux"
 )
@@ -22,7 +22,7 @@ func NewItemHandler(svc service.ItineraryService) *ItineraryHandler {
 }
 
 func (h *ItineraryHandler) AddItinerary(w http.ResponseWriter, r *http.Request) {
-	var itinerary *models.Itinerary
+	var itinerary *entity.Itinerary
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println(errors.New("item not added"))
@@ -50,7 +50,7 @@ func (h *ItineraryHandler) GetItinerary(w http.ResponseWriter, r *http.Request) 
 		fmt.Println(errors.New("item not added"))
 	}
 	fmt.Println("string(body)", string(body))
-	var itinerary *models.Itinerary
+	var itinerary *entity.Itinerary
 	json.Unmarshal(body, &itinerary)
 	fmt.Println("itinerary", itinerary)
 	_, err = h.service.GetItineraryById(id)
@@ -67,7 +67,7 @@ func (h *ItineraryHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println("body", body)
-	var item models.ItineraryItem
+	var item entity.ItineraryItem
 	json.Unmarshal(body, &item)
 
 	_, err = h.service.AddItem(&item)
@@ -90,7 +90,7 @@ func (h *ItineraryHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {
 func (h *ItineraryHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 	fmt.Println("id", id)
-	var item *models.ItineraryItem
+	var item *entity.ItineraryItem
 	if id == "" {
 		http.Error(w, "Item not found", http.StatusNotFound)
 	}
@@ -104,7 +104,7 @@ func (h *ItineraryHandler) GetAllItineraries(w http.ResponseWriter, r *http.Requ
 
 }
 
-func indexByID(items []models.ItineraryItem, id string) int {
+func indexByID(items []entity.ItineraryItem, id string) int {
 	for i := 0; i < len(items); i++ {
 		if items[i].ItineraryID == id {
 			return i

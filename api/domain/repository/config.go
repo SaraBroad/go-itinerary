@@ -6,7 +6,7 @@ import (
 
 	// "github.com/jinzhu/gorm"
 
-	"github.com/SaraBroad/go-itinerary/api/models"
+	models "github.com/SaraBroad/go-itinerary/api/domain/entity"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -21,7 +21,7 @@ func ConnectDatabase() *gorm.DB {
 		os.Getenv("DBNAME"),
 		os.Getenv("PORT"),
 	)
-	fmt.Println(dburl)
+	fmt.Println("dburl", dburl)
 	db, err := gorm.Open(postgres.Open(dburl), &gorm.Config{})
 	// db, err := gorm.Open("postgres", dburl)
 	if err != nil {
