@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/SaraBroad/go-itinerary/api/domain/entity"
@@ -44,7 +45,6 @@ func (h *ItineraryHandler) AddItinerary(w http.ResponseWriter, r *http.Request) 
 func (h *ItineraryHandler) GetItinerary(w http.ResponseWriter, r *http.Request) {
 	// json new encoder
 	id := mux.Vars(r)["id"]
-	fmt.Println("id", id)
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println(errors.New("item not added"))
@@ -55,7 +55,7 @@ func (h *ItineraryHandler) GetItinerary(w http.ResponseWriter, r *http.Request) 
 	fmt.Println("itinerary", itinerary)
 	_, err = h.service.GetItineraryById(id)
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 }
 

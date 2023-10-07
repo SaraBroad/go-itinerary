@@ -9,6 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// TODO add a user repository
 type ItineraryRepository interface {
 	CreateNewItinerary(itinerary *models.Itinerary) (*models.Itinerary, error)
 	FetchItinerary(id string) (*models.Itinerary, error)
@@ -74,7 +75,8 @@ func (db *Database) FetchAllItineraries() ([]*models.Itinerary, error) {
 func (db *Database) CreateNewItineraryItem(itineraryId string, item *models.ItineraryItem) (*models.ItineraryItem, error) {
 	// get itinerary by id
 	// create item within itinerary
-
+	item.ItineraryID = itineraryId
+	// err := db.DB.Create(&item)
 	err := db.DB.Create(&item)
 	if err != nil {
 		fmt.Println("CreateNewItem", err)
@@ -82,7 +84,6 @@ func (db *Database) CreateNewItineraryItem(itineraryId string, item *models.Itin
 	}
 	return item, nil
 }
-
 func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, error) {
 	if id == "" {
 		return nil, errors.New("id can't be nil")

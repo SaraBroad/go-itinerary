@@ -79,9 +79,9 @@ func (i *ItineraryService) GetAllItineraries() ([]*entity.Itinerary, error) {
 	return itineraries, nil
 }
 
-func (i *ItineraryService) AddItem(item *entity.ItineraryItem) (*entity.ItineraryItem, error) {
+func (i *ItineraryService) AddItem(itineraryId string, item *entity.ItineraryItem) (*entity.ItineraryItem, error) {
 
-	newItem, err := i.itineraryRepo.CreateNewItineraryItem("", item)
+	newItem, err := i.itineraryRepo.CreateNewItineraryItem(itineraryId, item)
 	if err != nil {
 		return nil, errors.Wrap(err, "add item service error")
 	}
