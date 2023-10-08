@@ -77,11 +77,13 @@ func (db *Database) CreateNewItineraryItem(itineraryId string, item *models.Itin
 	// create item within itinerary
 	item.ItineraryID = itineraryId
 	// err := db.DB.Create(&item)
+	// find by foreign key
 	err := db.DB.Create(&item)
 	if err != nil {
 		fmt.Println("CreateNewItem", err)
 		return &models.ItineraryItem{}, errors.New("create new items error")
 	}
+	fmt.Println("item", item)
 	return item, nil
 }
 func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, error) {

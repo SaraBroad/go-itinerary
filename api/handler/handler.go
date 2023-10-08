@@ -70,7 +70,7 @@ func (h *ItineraryHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 	var item entity.ItineraryItem
 	json.Unmarshal(body, &item)
 
-	_, err = h.service.AddItem(&item)
+	_, err = h.service.AddItem("", &item)
 	fmt.Println(item)
 	if err != nil {
 		fmt.Println(errors.New("item not added"))

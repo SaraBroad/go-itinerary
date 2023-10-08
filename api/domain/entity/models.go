@@ -24,13 +24,13 @@ type ItineraryItem struct {
 	gorm.Model
 	ID           uuid.UUID `gorm:"primary_key;autoIncrement" json:"itinerary_item_id"`
 	Name         string    `json:"item_name"`
-	Location     Location
-	TimeAllotted string
+	Location     Location  `json:"location"`
+	TimeAllotted time.Time `json:"time_allotted"`
 	// Price        float64 //TODO:remove
-	Price       *Price
-	Category    *Category
-	DayNumber   *DayNumber
-	ItineraryID string
+	Price       *Price     `json:"price"`
+	Category    *Category  `json:"category"`
+	DayNumber   *DayNumber `json:"day_number"`
+	ItineraryID string     `json:"itinerary_id"`
 }
 
 type Location struct {
