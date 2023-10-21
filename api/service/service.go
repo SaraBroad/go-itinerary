@@ -80,6 +80,11 @@ func (i *ItineraryService) GetAllItineraries() ([]*entity.Itinerary, error) {
 }
 
 func (i *ItineraryService) AddItem(itineraryId string, item *entity.ItineraryItem) (*entity.ItineraryItem, error) {
+	fmt.Println("itinerary id service", itineraryId)
+	fmt.Println("service item", item)
+	if item.Name == "" {
+		return nil, errors.New("your item requires a name")
+	}
 
 	newItem, err := i.itineraryRepo.CreateNewItineraryItem(itineraryId, item)
 	if err != nil {

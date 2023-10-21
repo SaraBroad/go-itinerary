@@ -10,19 +10,19 @@ import (
 type Itinerary struct {
 	gorm.Model
 
-	ID        uuid.UUID `gorm:"primaryKey;autoIncrement" json:"itinerary_id"`
+	ID        string    `gorm:"primaryKey;autoIncrement" json:"itinerary_id"`
 	Name      string    `json:"itinerary_name"`
 	StartDate time.Time `json:"start_date"`
 	EndDate   time.Time `json:"end_date"`
 	//1:M `gorm:"foreignKey:LocationID"
 	Locations []*Location `json:"locations"`
 	//1:M
-	Items []*ItineraryItem `json:"items"`
+	Items []*ItineraryItem `gorm:"foreignKey:ItineraryID"`
 }
 
 type ItineraryItem struct {
 	gorm.Model
-	ID           uuid.UUID `gorm:"primary_key;autoIncrement" json:"itinerary_item_id"`
+	ID           string    `gorm:"primary_key;autoIncrement" json:"itinerary_item_id"`
 	Name         string    `json:"item_name"`
 	Location     Location  `json:"location"`
 	TimeAllotted time.Time `json:"time_allotted"`

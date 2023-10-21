@@ -3,6 +3,7 @@ package repository
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	models "github.com/SaraBroad/go-itinerary/api/domain/entity"
 	"github.com/google/uuid"
@@ -32,7 +33,7 @@ func NewItinerary(db *gorm.DB) Database {
 }
 
 func (db *Database) CreateNewItinerary(itinerary *models.Itinerary) (*models.Itinerary, error) {
-	itinerary.ID = uuid.New()
+	itinerary.ID = uuid.New().String()
 	fmt.Println("item.ID", itinerary.ID)
 	err := db.DB.Create(&itinerary)
 	if err != nil {
@@ -73,19 +74,29 @@ func (db *Database) FetchAllItineraries() ([]*models.Itinerary, error) {
 }
 
 func (db *Database) CreateNewItineraryItem(itineraryId string, item *models.ItineraryItem) (*models.ItineraryItem, error) {
-	// get itinerary by id
-	// create item within itinerary
+	fmt.Println("itinerary id", itineraryId)
 	item.ItineraryID = itineraryId
-	// err := db.DB.Create(&item)
-	// find by foreign key
-	err := db.DB.Create(&item)
-	if err != nil {
-		fmt.Println("CreateNewItem", err)
-		return &models.ItineraryItem{}, errors.New("create new items error")
+	item.ID = uuid.New().String()
+	newItem := models.ItineraryItem{
+		ItineraryID:  itineraryId,
+		ID:           uuid.New().String(),
+		Name:         item.Name,
+		Location:     models.Location{},
+		TimeAllotted: time.Time{},
+		// Price:        &models.Price{},
+		// Category:     &models.Category{},
+		// DayNumber:    &models.DayNumber{},
+	}
+	// i.Items = append(i.Items, &newItem)
+	err := db.DB.Create(&newItem)
+	if err.Error != nil {
+		// fmt.Println("CreateNewItem", err)
+		return &models.ItineraryItem{}, fmt.Errorf("error adding an item %v", err)
 	}
 	fmt.Println("item", item)
 	return item, nil
 }
+
 func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, error) {
 	if id == "" {
 		return nil, errors.New("id can't be nil")
@@ -100,6 +111,7 @@ func (db *Database) GetItineraryItemById(id string) (*models.ItineraryItem, erro
 
 func (db *Database) GetAllItinraryItemsByItineraryId() ([]*models.ItineraryItem, error) {
 	var items []*models.ItineraryItem
+	// change to where itinerary id
 	if err := db.DB.Find(&items); err != nil {
 		fmt.Println("GetAllItems err", err)
 		return nil, errors.New("get all items error")
@@ -144,7 +156,7 @@ func (db *Database) DeleteItineraryItem(id string) error {
 	}
 	var items *models.ItineraryItem
 	if err := db.DB.Where("id = ?", id).Delete(&items); err != nil {
-		return errors.New("Cannot delete")
+		return errors.New("cannot delete")
 	}
 	return nil
 }

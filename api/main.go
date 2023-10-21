@@ -24,7 +24,7 @@ func main() {
 	ih := handler.NewItemHandler(*is)
 	// fmt.Println("ih", ih.GetItinerary)
 	router := mux.NewRouter()
-	// router.HandleFunc("/items", ih.AddItem).Methods("POST")
+	router.HandleFunc("/add-item", ih.AddItem).Methods("POST")
 	// router.HandleFunc("/items/{id}", ih.RemoveItem).Methods("DELETE")
 	router.HandleFunc("/health-check", HealthCheck).Methods("GET")
 	router.HandleFunc("/itinerary", ih.AddItinerary).Methods("POST")

@@ -60,18 +60,20 @@ func (h *ItineraryHandler) GetItinerary(w http.ResponseWriter, r *http.Request) 
 }
 
 func (h *ItineraryHandler) AddItem(w http.ResponseWriter, r *http.Request) {
-
+	// id := mux.Vars(r)["itinerary_id"]
+	// fmt.Println("id", id)
 	// defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		return
 	}
-	fmt.Println("body", body)
+	fmt.Println("body", string(body))
 	var item entity.ItineraryItem
 	json.Unmarshal(body, &item)
-
-	_, err = h.service.AddItem("", &item)
+	fmt.Println("unmarshal", item.ItineraryID)
+	i, err := h.service.AddItem(item.ItineraryID, &item)
 	fmt.Println(item)
+	fmt.Println("i", i)
 	if err != nil {
 		fmt.Println(errors.New("item not added"))
 	}
@@ -104,11 +106,11 @@ func (h *ItineraryHandler) GetAllItineraries(w http.ResponseWriter, r *http.Requ
 
 }
 
-func indexByID(items []entity.ItineraryItem, id string) int {
-	for i := 0; i < len(items); i++ {
-		if items[i].ItineraryID == id {
-			return i
-		}
-	}
-	return -1
-}
+// func indexByID(items []entity.ItineraryItem, id string) int {
+// 	for i := 0; i < len(items); i++ {
+// 		if items[i].ItineraryID == id {
+// 			return i
+// 		}
+// 	}
+// 	return -1
+// }
