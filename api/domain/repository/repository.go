@@ -77,6 +77,14 @@ func (db *Database) CreateNewItineraryItem(itineraryId string, item *models.Itin
 	fmt.Println("itinerary id", itineraryId)
 	item.ItineraryID = itineraryId
 	item.ID = uuid.New().String()
+
+	if item.Price == nil {
+		item.Price = &models.Price{}
+	}
+	if item.Category == nil {
+		item.Category = &models.Category{}
+	}
+
 	newItem := models.ItineraryItem{
 		ItineraryID:  itineraryId,
 		ID:           uuid.New().String(),
