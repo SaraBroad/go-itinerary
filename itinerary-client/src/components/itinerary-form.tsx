@@ -11,6 +11,10 @@ export const ItineraryForm = () => {
             Name{': '}
             <input value={name} onChange={e => setName(e.target.value)} />
         </label>
+        <label>
+            StartDate{': '}
+            <input value={startDate} onChange={e => setStartDate(e.target.value)} />
+        </label>
         </>
     )
 }

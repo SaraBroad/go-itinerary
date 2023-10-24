@@ -4,5 +4,5 @@ export default interface Itinerary {
     items: string[]
     startDate: string
     endDate: string
-    locations: string[]
+    locations?: string[]
 }

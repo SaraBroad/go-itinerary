@@ -5,7 +5,18 @@ interface Props {
     itinerary: Itinerary
 }
 
-export const ItineraryList = ( ) => {
+const Itineraries: Itinerary[] = [
+    {
+        id: "",
+        name: "",
+        items: [],
+        startDate: "",
+        endDate: "",
+        locations: [],
+    }
+]
+
+export const ItineraryList = () => {
 
 // export const ItineraryList: React.FC<Props> = ({ itinerary }) => {
     // console.log(itinerary)
