@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Button from '@mui/material/Button';
 
 export const ItineraryForm = () => {
     const [name, setName] = useState('')
@@ -29,6 +30,7 @@ export const ItineraryForm = () => {
             Locations{': '}
             <input value={locations} onChange={handleLocationChange} />
         </label>
+        <Button variant='contained'>Submit</Button>
         </>
     )
 }
