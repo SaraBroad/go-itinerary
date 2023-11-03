@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Itinerary from "../types";
+import "./itinerary.css"
 
 interface ListProps {
   itineraries: Itinerary[];
@@ -45,21 +46,22 @@ export const ItineraryList = () => {
   // export const ItineraryList = ({ itinerary }: ListProps ) => {
   return (
     <div>
-      <TableContainer component={Paper}></TableContainer>
+      {/* <TableContainer component={Paper}>Hello</TableContainer> */}
+      <div className="list-component">
       {itineraryList.map((i) => {
         return (
           <div>
             <div>
               <h3>Name: {i.name}</h3>{" "}
             </div>
-            <div>{i.startDate}</div>
-            <div>{i.endDate}</div>
+            <div>Start Date:{i.startDate}</div>
+            <div>End Date:{i.endDate}</div>
             {i.items?.length === 0 ? (
-              <div>Nothing to do yet</div>
+              <div>Activities: Nothing to do yet</div>
             ) : (
               <div>Activities:{i.items}</div>
             )}
-            <div>Activities: {i.items}</div>
+            {/* <div>Activities: {i.items}</div> */}
             {i.locations?.length === 0 ? (
               <div>Locations: No destinations yet</div>
             ) : (
@@ -68,6 +70,7 @@ export const ItineraryList = () => {
           </div>
         );
       })}
+      </div>
     </div>
   );
 };
