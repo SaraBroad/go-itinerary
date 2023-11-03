@@ -9,8 +9,10 @@ import { ItineraryForm } from './components/itinerary-form';
 function App() {
   return (
     <>
-    <Routes></Routes>
-      <ItineraryForm />
+    {/* <Routes>
+      <Route path="/list" element={<ItineraryList/>} />
+    </Routes> */}
+      <ItineraryForm /> 
       <ItineraryList />
     </>
   );
