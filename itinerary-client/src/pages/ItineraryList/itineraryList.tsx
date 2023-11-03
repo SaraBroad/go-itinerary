@@ -1,6 +1,6 @@
 import React from "react";
-import Itinerary from "../types";
-import { ItineraryList } from "../components/itinerary-list";
+import Itinerary from "../../types";
+import { ItineraryList } from "../../components/ItineraryList/ItineraryList";
   
   const itineraries: Itinerary[] = [
     {
