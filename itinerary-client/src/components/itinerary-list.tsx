@@ -40,10 +40,9 @@ const itineraries: Itinerary[] = [
   },
 ];
 
-export const ItineraryList = () => {
+export const ItineraryList = (itinerary: ListProps) => {
+console.log("ListProps", itinerary)
   const [itineraryList, setItineraryList] = useState(itineraries);
-
-  // export const ItineraryList = ({ itinerary }: ListProps ) => {
   return (
     <div>
       {/* <TableContainer component={Paper}>Hello</TableContainer> */}

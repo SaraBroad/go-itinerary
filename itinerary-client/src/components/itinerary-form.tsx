@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactHTMLElement, useCallback, useState } from 'react'
 import Button from '@mui/material/Button';
 
 export const ItineraryForm = () => {
@@ -11,7 +11,7 @@ export const ItineraryForm = () => {
         const value = event.target.value
         setLocations([...locations, value])
     }
-
+    
     return (
         <>
         <label>
