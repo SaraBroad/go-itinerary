@@ -57,6 +57,9 @@ func (h *ItineraryHandler) GetItinerary(w http.ResponseWriter, r *http.Request) 
 	if err != nil {
 		log.Fatal(err)
 	}
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode("Created")
 }
 
 func (h *ItineraryHandler) AddItem(w http.ResponseWriter, r *http.Request) {
@@ -87,6 +90,9 @@ func (h *ItineraryHandler) RemoveItem(w http.ResponseWriter, r *http.Request) {
 	if err := h.service.RemoveItem(id); err != nil {
 		fmt.Println("err", err)
 	}
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode("Deleted")
 }
 
 func (h *ItineraryHandler) GetItemByItemId(w http.ResponseWriter, r *http.Request) {
@@ -97,6 +103,9 @@ func (h *ItineraryHandler) GetItemByItemId(w http.ResponseWriter, r *http.Reques
 		http.Error(w, "Item not found", http.StatusNotFound)
 	}
 	fmt.Println("item", item)
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(item)
 }
 
 func (h *ItineraryHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}
