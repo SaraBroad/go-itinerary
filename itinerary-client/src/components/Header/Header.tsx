@@ -1,5 +1,5 @@
 import React from "react";
-import "./itinerary.css"
+import "../itinerary.css"
 
 
 export const Header = () => {

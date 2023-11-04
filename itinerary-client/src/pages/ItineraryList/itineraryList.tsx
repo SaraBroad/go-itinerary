@@ -33,7 +33,7 @@ import { ItineraryList } from "../../components/ItineraryList/ItineraryList";
     console.log(itineraries)
     return (
         <>
-        <h3>Itineraries</h3>
+        <h3 className="itinerary-header">Itineraries</h3>
         <ItineraryList itineraries={itineraries} />
         {/* <ItineraryList /> */}
         </>

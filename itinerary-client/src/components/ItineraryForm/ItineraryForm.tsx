@@ -12,6 +12,10 @@ export const ItineraryForm = () => {
         setLocations([...locations, value])
     }
     
+    const handleSubmit = () => {
+        console.log("click")
+    }
+
     return (
         <>
         <label>
@@ -30,7 +34,7 @@ export const ItineraryForm = () => {
             Locations{': '}
             <input value={locations} onChange={handleLocationChange} />
         </label>
-        <Button variant='contained'>Submit</Button>
+        <Button variant='contained' onClick={handleSubmit}>Submit</Button>
         </>
     )
 }
