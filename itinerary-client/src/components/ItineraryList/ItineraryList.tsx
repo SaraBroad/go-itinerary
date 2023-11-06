@@ -13,10 +13,9 @@ interface ListProps {
   itineraries: Itinerary[];
 }
 
-export const ItineraryList = (itinerary: ListProps) => {
-console.log("ListProps", itinerary)
-  let itineraryListItems = itinerary.itineraries
-  const [itineraryList, setItineraryList] = useState(itineraryListItems);
+export const ItineraryList = ({itineraries}: ListProps) => {
+console.log("itineraries", itineraries)
+  const [itineraryList, setItineraryList] = useState(itineraries);
   return (
     <div>
       {/* <TableContainer component={Paper}>Hello</TableContainer> */}
