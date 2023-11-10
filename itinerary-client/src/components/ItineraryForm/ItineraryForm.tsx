@@ -7,13 +7,21 @@ export const ItineraryForm = () => {
     const [endDate, setEndDate] = useState('')
     const [locations, setLocations] = useState<string[]>([])
 
+    const [formData, setFormData] = useState({
+        name: "",
+        startDate: "",
+        endDate: "",
+        locations: []
+    })
+
     const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value
         setLocations([...locations, value])
     }
     
-    const handleSubmit = () => {
-        console.log("click")
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
+        alert('Form Submitted')
+        console.log(e)
     }
 
     return (
