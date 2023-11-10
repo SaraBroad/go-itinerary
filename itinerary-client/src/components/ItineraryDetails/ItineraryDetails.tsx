@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ItineraryDetails = (props: {name: string, isCompleted: boolean}) => {
+export const ItineraryDetails = (props: {name: string, isCompleted?: boolean}) => {
     console.log(props.name, props.isCompleted)
     return (
         <div>
