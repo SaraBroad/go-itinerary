@@ -26,7 +26,8 @@ export const ItineraryForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}> 
+    <div className="form-container">
+      <form onSubmit={handleSubmit} className="form-fields"> 
         <label>
           Name{": "}
           <input value={name} onChange={(e) => setName(e.target.value)} />
@@ -52,6 +53,7 @@ export const ItineraryForm = () => {
       {/* <Button variant="contained" onClick={handleSubmit}>
         Submit
       </Button> */}
+        </div>
     </>
   );
 };
