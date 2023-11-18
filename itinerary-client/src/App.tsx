@@ -1,13 +1,13 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import logo from './logo.svg';
-import './App.css';
-import { ItineraryList } from './components/ItineraryList/ItineraryList'
-import { ItineraryForm } from './components/ItineraryForm/ItineraryForm';
-import { ItineraryListPage } from './pages/ItineraryList/itineraryList';
-import { Header } from './components/Header/Header';
-import Itinerary from './types';
+import logo from "./logo.svg";
+import "./App.css";
+import { ItineraryList } from "./components/ItineraryList/ItineraryList";
+import { ItineraryForm } from "./components/ItineraryForm/ItineraryForm";
+import { ItineraryListPage } from "./pages/ItineraryList/itineraryList";
+import { Header } from "./components/Header/Header";
+import Itinerary from "./types";
 
 const itineraries: Itinerary[] = [
   {
@@ -39,12 +39,13 @@ const itineraries: Itinerary[] = [
 function App() {
   return (
     <>
-    <Header />
-    <Routes>
-       <Route path="/list" element={<ItineraryListPage itineraries={itineraries}/>} />
-       {/* <Route path="/list" element={<ItineraryList/>} /> */}
-       <Route path="/newItinerary" element={<ItineraryForm />} />
-    </Routes>
+      <Header />
+      <Routes>
+        <Route path="/list" element={<ItineraryListPage />} />
+        <Route path="/newItinerary" element={<ItineraryForm />} />
+        {/* <Route path="/list" element={<ItineraryListPage itineraries={itineraries}/>} /> */}
+        {/* <Route path="/list" element={<ItineraryList/>} /> */}
+      </Routes>
     </>
   );
 }

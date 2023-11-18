@@ -33,7 +33,7 @@ export const ItineraryForm = () => {
               className="formField"
               type="text"
               name="name"
-              placeholder="Itinerary Name"
+              required={true}
               value={values.name}
               onChange={handleChange}
             />
@@ -44,7 +44,6 @@ export const ItineraryForm = () => {
               className="formField"
               type="text"
               name="startDate"
-              placeholder="Start Date"
               value={values.startDate}
               onChange={handleChange}
             />
@@ -55,7 +54,6 @@ export const ItineraryForm = () => {
               className="formField"
               type="text"
               name="endDate"
-              placeholder="End Date"
               value={values.endDate}
               onChange={handleChange}
             />
@@ -66,7 +64,6 @@ export const ItineraryForm = () => {
               className="formField"
               type="text"
               name="locations"
-              placeholder="Enter a list of locations"
               value={values.locations}
               onChange={handleChange}
             />

@@ -17,7 +17,8 @@ type Itinerary struct {
 	//1:M `gorm:"foreignKey:LocationID"
 	Locations []*Location `json:"locations"`
 	//1:M
-	Items []*ItineraryItem `gorm:"foreignKey:ItineraryID"`
+	Items  []*ItineraryItem `gorm:"foreignKey:ItineraryID"`
+	UserId string
 }
 
 type ItineraryItem struct {
