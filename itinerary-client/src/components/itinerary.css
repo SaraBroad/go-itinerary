@@ -1,29 +1,55 @@
 .header-text {
-    color: blue
+  color: blue;
 }
 
 .list-component {
-    margin-left: 40px;
+  margin-left: 40px;
 }
 
 .header {
-    text-align: center;
+  text-align: center;
 }
 
 .itinerary-header {
-    margin-left: 40px;
+  margin-left: 40px;
 }
 
 .form-fields {
-    display: flex;
-    border: black;
-    justify-content: space-evenly;
-    flex-direction: horizontal;
+  display: flex;
+  border: black;
+  justify-content: space-evenly;
+  /* flex-direction: horizontal; */
 }
 
 .form-container {
-    margin-left: 25px;
-    margin-right: 25px;
-    outline: solid 2px black;
-    padding: 30px;
+  margin-left: 25px;
+  margin-right: 25px;
+  outline: solid 2px black;
+  padding: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form {
+  max-width: 30rem;
+  margin: auto;
+}
+
+.formLabel {
+  margin-bottom: 0.25rem;
+}
+
+.formField {
+  padding: 0.5rem;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.formSubmitBtn {
+    padding: 0.5rem 0.7rem
 }
