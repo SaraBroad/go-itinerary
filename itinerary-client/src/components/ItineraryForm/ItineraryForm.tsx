@@ -18,7 +18,6 @@ export const ItineraryForm = () => {
   };
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
     console.log(values);
     alert(JSON.stringify(values, null, 2));
   };
