@@ -1,5 +1,5 @@
 export default interface Itinerary {
-    id: string
+    id?: string
     name: string
     items?: string[]
     startDate?: string

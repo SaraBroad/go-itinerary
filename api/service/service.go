@@ -23,7 +23,7 @@ func NewItineraryService(iRepo repository.Database) *ItineraryService {
 type database interface {
 	CreateNewItineraryItem(item *entity.ItineraryItem) (*entity.ItineraryItem, error)
 	GetItineraryItemById(id string) (*entity.ItineraryItem, error)
-	UpdateItineraryItem(id string, item entity.ItineraryItem) (*entity.ItineraryItem, error)
+	UpdateItinerary(id string, item entity.Itinerary) (*entity.ItineraryItem, error)
 	DeleteItineraryItem(id string) error
 }
 
@@ -101,13 +101,21 @@ func (i *ItineraryService) FindItemById(id string) (*entity.ItineraryItem, error
 	return item, nil
 }
 
-func (i *ItineraryService) Update(id string, item *entity.ItineraryItem) (*entity.ItineraryItem, error) {
-	item, err := i.itineraryRepo.UpdateItinerary(id, *item)
+func (i *ItineraryService) UpdateItineraryById(id string, item *entity.Itinerary) (*entity.Itinerary, error) {
+	itinerary, err := i.itineraryRepo.UpdateItinerary(id, *item)
 	if err != nil {
 		fmt.Println("Update item service error")
 	}
-	return item, nil
+	return itinerary, nil
 }
+
+// func (i *ItineraryService) UpdateItineraryItemById(id string, item *entity.ItineraryItem) (*entity.ItineraryItem, error) {
+// 	item, err := i.itineraryRepo.UpdateItinerary(id, *item)
+// 	if err != nil {
+// 		fmt.Println("Update item service error")
+// 	}
+// 	return item, nil
+// }
 
 func (i *ItineraryService) RemoveItem(id string) error {
 	fmt.Println("id service", id)

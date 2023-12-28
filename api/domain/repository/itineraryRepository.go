@@ -24,9 +24,9 @@ type ItineraryRepository interface {
 	CreateNewLocation(loc *models.Location) (*models.Location, error)
 }
 
-type Database struct {
-	DB *gorm.DB
-}
+// type Database struct {
+// 	DB *gorm.DB
+// }
 
 func NewItinerary(db *gorm.DB) Database {
 	return Database{db}
@@ -128,7 +128,7 @@ func (db *Database) GetAllItinraryItemsByItineraryId() ([]*models.ItineraryItem,
 	return items, nil
 }
 
-func (db *Database) UpdateItinerary(id string, item models.ItineraryItem) (*models.ItineraryItem, error) {
+func (db *Database) UpdateItinerary(id string, item models.Itinerary) (*models.Itinerary, error) {
 	if id == "" {
 		return nil, errors.New("ID can't be nil")
 	}

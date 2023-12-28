@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import { ItineraryList } from "./components/ItineraryList/ItineraryList";
-import { ItineraryForm } from "./components/ItineraryForm/ItineraryForm";
+import { ItineraryFormPage } from "./pages/ItineraryForm/ItineraryForm";
 import { ItineraryListPage } from "./pages/ItineraryList/itineraryList";
 import { Header } from "./components/Header/Header";
 import Itinerary from "./types";
@@ -42,7 +42,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/list" element={<ItineraryListPage />} />
-        <Route path="/newItinerary" element={<ItineraryForm />} />
+        <Route path="/newItinerary" element={<ItineraryFormPage />} />
         {/* <Route path="/list" element={<ItineraryListPage itineraries={itineraries}/>} /> */}
         {/* <Route path="/list" element={<ItineraryList/>} /> */}
       </Routes>

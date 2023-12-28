@@ -115,6 +115,21 @@ func (h *ItineraryHandler) GetAllItineraries(w http.ResponseWriter, r *http.Requ
 
 }
 
+func (h *ItineraryHandler) UpdateItinerary(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return
+	}
+	var updatedItinerary entity.Itinerary
+	json.Unmarshal(body, &updatedItinerary)
+	_, err = h.service.UpdateItineraryById(id, &updatedItinerary)
+	if err != nil {
+		return
+	}
+
+}
+
 // func indexByID(items []entity.ItineraryItem, id string) int {
 // 	for i := 0; i < len(items); i++ {
 // 		if items[i].ItineraryID == id {

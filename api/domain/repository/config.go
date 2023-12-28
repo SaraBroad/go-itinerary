@@ -34,3 +34,7 @@ func ConnectDatabase() *gorm.DB {
 	fmt.Println("tables", t)
 	return db
 }
+
+type Database struct {
+	DB *gorm.DB
+}
