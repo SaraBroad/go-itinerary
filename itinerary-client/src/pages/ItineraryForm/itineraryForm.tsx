@@ -3,10 +3,11 @@ import React from "react";
 import axios, { AxiosResponse } from "axios";
 import { ItineraryForm } from "../../components/ItineraryForm/ItineraryForm";
 import Itinerary from "../../types";
+import { json } from "stream/consumers";
 
 export const ItineraryFormPage = () => {
   const [values, setValues] = useState({
-    name: "",
+    itinerary_name: "",
     startDate: "",
     endDate: "",
     locations: [],
@@ -20,10 +21,22 @@ export const ItineraryFormPage = () => {
     });
   };
 
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, PUT, PATCH, GET, DELETE, OPTIONS",
+    },
+    body: JSON.stringify(values),
+  };
+
   function saveFormData() {
     axios
       .post("http://localhost:8080/itinerary", {
         values,
+
         // withCredentials: true,
         // Headers: {
         //   "Content-Type": "application/json",
@@ -52,7 +65,7 @@ export const ItineraryFormPage = () => {
   }
   // use effect
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     alert(JSON.stringify(values, null, 2));
 
     // console.log("values", values);
@@ -73,9 +86,20 @@ export const ItineraryFormPage = () => {
     // } catch (error) {
     //   console.log("error", error);
     // }
-    saveFormData()
+    fetch("http://localhost:8080/itinerary", {
+      method: 'POST', 
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+      // body: JSON.stringify({
+      //   "itinerary_name": "Test"
+      // })
+    })
+    // saveFormData();
   };
-
+  console.log("handleSubmit", handleSubmit)
   return (
     <>
       <div>
@@ -85,9 +109,9 @@ export const ItineraryFormPage = () => {
             <input
               className="formField"
               type="text"
-              name="name"
+              name="itinerary_name"
               required={true}
-              value={values.name}
+              value={values.itinerary_name}
               onChange={handleChange}
             />
           </div>

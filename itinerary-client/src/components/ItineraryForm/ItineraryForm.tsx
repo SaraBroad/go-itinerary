@@ -7,12 +7,12 @@ interface ItineraryFormProps {
 }
 
 export const ItineraryForm = ({ itinerary }: ItineraryFormProps) => {
-  console.log("itineraryform", itinerary.name);
+  console.log("itineraryform", itinerary.itinerary_name);
 
   return (
     <>
       <div>
-        <div>{itinerary.name}</div>
+        <div>{itinerary.itinerary_name}</div>
         <div>{itinerary.startDate}</div>
         <div>{itinerary.endDate}</div>
         <div>{itinerary.locations}</div>

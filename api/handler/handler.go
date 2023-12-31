@@ -28,6 +28,7 @@ func (h *ItineraryHandler) AddItinerary(w http.ResponseWriter, r *http.Request) 
 	if err != nil {
 		fmt.Println(errors.New("item not added"))
 	}
+	fmt.Println("r.body", r.Body)
 	err = json.Unmarshal(body, &itinerary)
 	fmt.Println("handler", itinerary.Name)
 

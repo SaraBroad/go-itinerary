@@ -14,7 +14,7 @@ export const ItineraryList = ({ itineraries }: ListProps) => {
     return (
       <div key={i.id}>
         <div>
-          <h3>Name: {i.name}</h3>{" "}
+          <h3>Name: {i.itinerary_name}</h3>{" "}
         </div>
         <div>Start Date:{i.startDate}</div>
         <div>End Date:{i.endDate}</div>
