@@ -46,21 +46,29 @@ func (h *ItineraryHandler) AddItinerary(w http.ResponseWriter, r *http.Request) 
 func (h *ItineraryHandler) GetItinerary(w http.ResponseWriter, r *http.Request) {
 	// json new encoder
 	id := mux.Vars(r)["id"]
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		fmt.Println(errors.New("item not added"))
-	}
-	fmt.Println("string(body)", string(body))
-	var itinerary *entity.Itinerary
-	json.Unmarshal(body, &itinerary)
-	fmt.Println("itinerary", itinerary)
-	_, err = h.service.GetItineraryById(id)
+	// body, err := ioutil.ReadAll(r.Body)
+	// if err != nil {
+	// 	fmt.Println(errors.New("item not added"))
+	// }
+	// fmt.Println("string(body)", string(body))
+	// // var itinerary *entity.Itinerary
+	// resp, err := json.Marshal(body)
+	// if err != nil {
+	// 	return
+	// }
+	// fmt.Println("resp", resp)
+	// // fmt.Println("resp", resp)
+	// // fmt.Println("itinerary", itinerary)
+	res, err := h.service.GetItineraryById(id)
+	fmt.Println("res", res)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// fmt.Println("itinerary in handler", &itinerary)
 	w.Header().Add("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode("Created")
+	w.WriteHeader(http.StatusOK)
+	// w.Write([]byte("Successfully added"))
+	json.NewEncoder(w).Encode(res)
 }
 
 func (h *ItineraryHandler) AddItem(w http.ResponseWriter, r *http.Request) {
@@ -73,7 +81,10 @@ func (h *ItineraryHandler) AddItem(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println("body", string(body))
 	var item entity.ItineraryItem
-	json.Unmarshal(body, &item)
+	err = json.Unmarshal(body, &item)
+	if err != nil {
+		return
+	}
 	fmt.Println("unmarshal", item.ItineraryID)
 	i, err := h.service.AddItem(item.ItineraryID, &item)
 	fmt.Println(item)
@@ -112,8 +123,26 @@ func (h *ItineraryHandler) GetItemByItemId(w http.ResponseWriter, r *http.Reques
 func (h *ItineraryHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}
 
 func (h *ItineraryHandler) GetAllItineraries(w http.ResponseWriter, r *http.Request) {
-	// var itineraries []*models.Itinerary
+	fmt.Println("here")
 
+	body, err := ioutil.ReadAll(r.Body)
+	fmt.Println("body", body)
+	if err != nil {
+		return
+	}
+	var itineraries []*entity.Itinerary
+	json.NewEncoder(w).Encode(itineraries)
+
+	err = json.Unmarshal(body, &itineraries)
+	fmt.Println("itineraries", itineraries)
+	if err != nil {
+		return
+	}
+	data, err := h.service.GetAllItineraries()
+	fmt.Println("data", data)
+	if err != nil {
+		return
+	}
 }
 
 func (h *ItineraryHandler) UpdateItinerary(w http.ResponseWriter, r *http.Request) {

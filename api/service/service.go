@@ -71,6 +71,7 @@ func (i *ItineraryService) GetItineraryById(id string) (*entity.Itinerary, error
 }
 
 func (i *ItineraryService) GetAllItineraries() ([]*entity.Itinerary, error) {
+	fmt.Println("service")
 	itineraries, err := i.itineraryRepo.FetchAllItineraries()
 	if err != nil {
 		return nil, errors.Wrap(err, "get itineraries by error")

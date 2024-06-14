@@ -37,6 +37,7 @@ func main() {
 	// router.HandleFunc("/health-check", HealthCheck).Methods("GET")
 	router.HandleFunc("/itinerary", ih.AddItinerary).Methods("POST")
 	router.HandleFunc("/itinerary/{id}", ih.GetItinerary).Methods("GET")
+	router.HandleFunc("/itineraries", ih.GetAllItineraries).Methods("GET")
 	http.Handle("/", handlers.CORS()(router))
 
 	log.Println("http server runs on :8080")

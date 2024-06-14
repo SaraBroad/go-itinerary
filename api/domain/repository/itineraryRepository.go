@@ -53,11 +53,9 @@ func (db *Database) FetchItinerary(id string) (*models.Itinerary, error) {
 	// 	return &models.Itinerary{}, errors.New("fetch itinerary by id error")
 	// }
 	err := db.DB.First(&itinerary, "id = ?", id)
-	fmt.Println("error", err.Error)
 	if err.Error != nil {
 		return nil, errors.New("error")
 	}
-	fmt.Println("here")
 	fmt.Println("itinerary repo", itinerary)
 	return itinerary, nil
 }

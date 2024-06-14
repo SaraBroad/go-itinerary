@@ -32,39 +32,41 @@ export const ItineraryFormPage = () => {
     body: JSON.stringify(values),
   };
 
-  function saveFormData() {
-    axios
-      .post("http://localhost:8080/itinerary", {
-        values,
+  // function saveFormData() {
+  //   axios
+  //     .post("http://localhost:8080/itinerary", {
+  //       values,
 
-        // withCredentials: true,
-        // Headers: {
-        //   "Content-Type": "application/json",
-        //   "Access-Control-Allow-Headers": "Content-Type",
-        //   "Access-Control-Allow-Origin": "*",
-        //   "Access-Control-Allow-Methods":
-        //     "POST, PUT, PATCH, GET, DELETE, OPTIONS",
-        //   "Access-Control-Allow-Credentials": true,
-        // },
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // const response: AxiosResponse = await axios.post(
-    //   "http://localhost:8080/itinerary",
-    //   dataToSend,
-    //   {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json"
-    //     }
-    //   }
-    // );
+  //       // withCredentials: true,
+  //       // Headers: {
+  //       //   "Content-Type": "application/json",
+  //       //   "Access-Control-Allow-Headers": "Content-Type",
+  //       //   "Access-Control-Allow-Origin": "*",
+  //       //   "Access-Control-Allow-Methods":
+  //       //     "POST, PUT, PATCH, GET, DELETE, OPTIONS",
+  //       //   "Access-Control-Allow-Credentials": true,
+  //       // },
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   // const response: AxiosResponse = await axios.post(
+  //   //   "http://localhost:8080/itinerary",
+  //   //   dataToSend,
+  //   //   {
+  //   //     headers: {
+  //   //       "Content-Type": "application/json",
+  //   //       Accept: "application/json"
+  //   //     }
+  //   //   }
+  //   // );
 
-    // const responseData: Itinerary = response.data;
+  //   // const responseData: Itinerary = response.data;
+  // }
+
+  async function saveFormData () {
+
   }
-  // use effect
-
   const handleSubmit = (e: { preventDefault: () => void }) => {
     alert(JSON.stringify(values, null, 2));
 
@@ -86,20 +88,18 @@ export const ItineraryFormPage = () => {
     // } catch (error) {
     //   console.log("error", error);
     // }
-    fetch("http://localhost:8080/itinerary", {
+
+   fetch("http://localhost:8080/itinerary", {
       method: 'POST', 
       mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(values)
-      // body: JSON.stringify({
-      //   "itinerary_name": "Test"
-      // })
-    })
+    }).then(async response => setValues(await response.json()))    
     // saveFormData();
   };
-  console.log("handleSubmit", handleSubmit)
+
   return (
     <>
       <div>

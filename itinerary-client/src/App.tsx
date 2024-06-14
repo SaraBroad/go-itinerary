@@ -43,6 +43,7 @@ function App() {
       <Routes>
         <Route path="/list" element={<ItineraryListPage />} />
         <Route path="/newItinerary" element={<ItineraryFormPage />} />
+
         {/* <Route path="/list" element={<ItineraryListPage itineraries={itineraries}/>} /> */}
         {/* <Route path="/list" element={<ItineraryList/>} /> */}
       </Routes>
