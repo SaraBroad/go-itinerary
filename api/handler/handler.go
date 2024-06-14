@@ -123,26 +123,13 @@ func (h *ItineraryHandler) GetItemByItemId(w http.ResponseWriter, r *http.Reques
 func (h *ItineraryHandler) GetAllItems(w http.ResponseWriter, r *http.Request) {}
 
 func (h *ItineraryHandler) GetAllItineraries(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("here")
-
-	body, err := ioutil.ReadAll(r.Body)
-	fmt.Println("body", body)
-	if err != nil {
-		return
-	}
-	var itineraries []*entity.Itinerary
-	json.NewEncoder(w).Encode(itineraries)
-
-	err = json.Unmarshal(body, &itineraries)
-	fmt.Println("itineraries", itineraries)
-	if err != nil {
-		return
-	}
+	fmt.Println("handler")
 	data, err := h.service.GetAllItineraries()
 	fmt.Println("data", data)
 	if err != nil {
 		return
 	}
+	json.NewEncoder(w).Encode(data)
 }
 
 func (h *ItineraryHandler) UpdateItinerary(w http.ResponseWriter, r *http.Request) {
