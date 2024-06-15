@@ -1,7 +1,5 @@
 package seed
 
-import "fmt"
-
 // import (
 // 	"fmt"
 // 	"time"
@@ -15,10 +13,6 @@ import "fmt"
 // type Database struct {
 // 	DB *gorm.DB
 // }
-
-func hello() {
-	fmt.Println("hi")
-}
 
 // func (db *Database) Seed() (*models.Itinerary, error) {
 // func (db *Database) Seed(itinerary *models.Itinerary) (*models.Itinerary, error) {

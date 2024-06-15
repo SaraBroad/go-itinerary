@@ -13,8 +13,8 @@ export const ItineraryForm = ({ itinerary }: ItineraryFormProps) => {
     <>
       <div>
         <div>{itinerary.itinerary_name}</div>
-        <div>{itinerary.startDate}</div>
-        <div>{itinerary.endDate}</div>
+        <div>{itinerary.start_date}</div>
+        <div>{itinerary.end_date}</div>
         <div>{itinerary.locations}</div>
       </div>
     </>

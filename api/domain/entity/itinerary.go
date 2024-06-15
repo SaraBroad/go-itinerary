@@ -9,7 +9,6 @@ import (
 
 type Itinerary struct {
 	gorm.Model
-
 	ID        string    `gorm:"primaryKey;autoIncrement" json:"itinerary_id"`
 	Name      string    `json:"itinerary_name"`
 	StartDate time.Time `json:"start_date"`

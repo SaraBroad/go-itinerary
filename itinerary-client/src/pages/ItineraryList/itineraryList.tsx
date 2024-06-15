@@ -6,7 +6,8 @@ import axios from "axios";
 
 export const ItineraryListPage = () => {
   // export const ItineraryListPage = ({ itineraries }: {itineraries: Itinerary[] }) => {
-  const [itineraryList, setItineraryList] = useState({})  
+  // const [itineraryList, setItineraryList] = useState({})  
+  const [itineraryList, setItineraryList] = useState([])  
 
   type GetUsersResponse = {
     data: Itinerary[];
@@ -55,7 +56,9 @@ export const ItineraryListPage = () => {
   //   }
   // }
   const itinerary = async () => {
-    const response = await fetch('http://localhost:8080/itinerary/84fadc21-c07a-470c-8a7e-4113b6193a29')
+    const response = await fetch('http://localhost:8080/itineraries')
+
+    // const response = await fetch('http://localhost:8080/itinerary/84fadc21-c07a-470c-8a7e-4113b6193a29')
     setItineraryList(await response.json())
     console.log(response.json)
   }

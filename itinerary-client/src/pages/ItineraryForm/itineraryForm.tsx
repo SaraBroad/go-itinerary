@@ -8,7 +8,7 @@ import { json } from "stream/consumers";
 export const ItineraryFormPage = () => {
   const [values, setValues] = useState({
     itinerary_name: "",
-    startDate: "",
+    start_date: "",
     endDate: "",
     locations: [],
     // add isCompleted
@@ -120,8 +120,8 @@ export const ItineraryFormPage = () => {
             <input
               className="formField"
               type="text"
-              name="startDate"
-              value={values.startDate}
+              name="start_date"
+              value={values.start_date}
               onChange={handleChange}
             />
           </div>
