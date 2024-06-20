@@ -8,6 +8,7 @@ import { ItineraryFormPage } from "./pages/ItineraryForm/ItineraryForm";
 import { ItineraryListPage } from "./pages/ItineraryList/itineraryList";
 import { Header } from "./components/Header/Header";
 import Itinerary from "./types";
+import { ItineraryDetailsPage } from "./pages/ItineraryDetails/ItineraryDetails";
 
 // const itineraries: Itinerary[] = [
 //   {
@@ -43,6 +44,7 @@ function App() {
       <Routes>
         <Route path="/list" element={<ItineraryListPage />} />
         <Route path="/newItinerary" element={<ItineraryFormPage />} />
+        <Route path="/details/:id" element={<ItineraryDetailsPage />} />
 
         {/* <Route path="/list" element={<ItineraryListPage itineraries={itineraries}/>} /> */}
         {/* <Route path="/list" element={<ItineraryList/>} /> */}

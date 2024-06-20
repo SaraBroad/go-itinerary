@@ -11,6 +11,7 @@ export const ItineraryFormPage = () => {
     start_date: "",
     endDate: "",
     locations: [],
+    items: []
     // add isCompleted
   });
 
@@ -142,6 +143,16 @@ export const ItineraryFormPage = () => {
               type="text"
               name="locations"
               value={values.locations}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="formGroup">
+            <label className="formLabel">Items:</label>
+            <input
+              className="formField"
+              type="text"
+              name="items"
+              value={values.items}
               onChange={handleChange}
             />
           </div>
