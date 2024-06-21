@@ -10,7 +10,6 @@ export const ItineraryDetailsPage = () => {
   return (
     <div>
       <div>
-        <div>Hey</div>
         <ItineraryDetails name={"The Louvre"} isCompleted={true} />
       </div>
     </div>

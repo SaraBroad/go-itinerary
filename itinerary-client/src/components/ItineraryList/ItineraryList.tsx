@@ -12,11 +12,10 @@ export const ItineraryList = ({ itineraries }: ListProps) => {
 
   const itineraryListItems = itineraries.map((i) => {
     return (
-      <div key={i.id}>
+      <div key={i.itinerary_id}>
         <div>
-          <Link to={`/details/${i.id}`}>
-                    <h3>Name: {i.itinerary_name}</h3>
-
+          <Link to={`/details/${i.itinerary_id}`}>
+            <h3>Name: {i.itinerary_name}</h3>
           </Link>
         </div>
         <div>Start Date: {i.start_date}</div>
