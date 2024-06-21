@@ -119,9 +119,17 @@ func (i *ItineraryService) UpdateItineraryById(id string, item *entity.Itinerary
 // }
 
 func (i *ItineraryService) RemoveItem(id string) error {
-	fmt.Println("id service", id)
+	fmt.Println("item id service", id)
 	if err := i.itineraryRepo.DeleteItineraryItem(id); err != nil {
 		fmt.Println("error deleting item in service", err)
 	}
+	return nil
+}
+
+func (i *ItineraryService) RemoveLocation(id string) error {
+	fmt.Println("location id service", id)
+	// if err := i.itineraryRepo.DeleteItineraryItem(id); err != nil {
+	// 	fmt.Println("error deleting item in service", err)
+	// }
 	return nil
 }
