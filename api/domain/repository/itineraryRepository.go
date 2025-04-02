@@ -88,7 +88,7 @@ func (db *Database) CreateNewItineraryItem(itineraryId string, item *models.Itin
 		// DayNumber:    &models.DayNumber{},
 	}
 	// i.Items = append(i.Items, &newItem)
-	err := db.DB.Create(&newItem)
+	err := db.DB.Create(&newItem).Where("newItem.ItineraryID = ?", itineraryId)
 	if err.Error != nil {
 		// fmt.Println("CreateNewItem", err)
 		return &models.ItineraryItem{}, fmt.Errorf("error adding an item %v", err)
